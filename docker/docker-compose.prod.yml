@@ -1,0 +1,25 @@
+services:
+
+  api:
+    build:
+      target: production
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+    # No ports exposed — traffic routes through the nginx reverse proxy
+
+  web:
+    build:
+      target: production
+      args:
+        - VITE_API_URL=${VITE_API_URL:?required in production}
+    ports:
+      - "80:80"
+      - "443:443"
+    restart: unless-stopped
+
+  postgres:
+    # In true production, replace with managed DB (RDS, Cloud SQL)
+    restart: unless-stopped

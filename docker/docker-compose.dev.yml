@@ -1,0 +1,38 @@
+services:
+
+  api:
+    build:
+      target: development   # Targets the 'development' Dockerfile stage
+    ports:
+      - "3000:3000"
+      - "9229:9229"        # Node.js inspector / debugger port
+    environment:
+      NODE_ENV: development
+    volumes:
+      # ★ Bind mount: host fs streams into container — no rebuild on file save
+      - ..:/app
+      # ★ Anonymous volume shield: protects Linux node_modules from host overwrite
+      - /app/node_modules
+      - /app/apps/api/node_modules
+      - /app/packages/shared/node_modules
+
+  web:
+    build:
+      target: development
+    ports:
+      - "5173:5173"
+    environment:
+      NODE_ENV: development
+      VITE_API_URL: http://localhost:3000
+    volumes:
+      - ..:/app
+      - /app/node_modules
+      - /app/apps/web/node_modules
+
+  postgres:
+    ports:
+      - "5432:5432"    # Expose for DB GUI tools (TablePlus, DBeaver)
+
+  redis:
+    ports:
+      - "6379:6379"    # Expose for Redis Insight

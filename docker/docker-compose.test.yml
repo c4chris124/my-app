@@ -1,0 +1,22 @@
+# CI-optimized: ephemeral DBs, no port exposure, no bind mounts
+
+services:
+
+  postgres:
+    environment:
+      POSTGRES_DB: testdb
+    tmpfs:
+      # ★ ADVANCED CONCEPT: tmpfs mounts
+      # In-memory filesystem — faster tests, guaranteed clean state between runs
+      - /var/lib/postgresql/data
+
+  redis:
+    command: redis-server --save ""   # Disable persistence for speed
+
+  api:
+    build:
+      target: builder            # builder stage has test deps (jest, ts-jest)
+    environment:
+      NODE_ENV: test
+      DATABASE_URL: postgres://appuser:password@postgres:5432/testdb
+    command: ["yarn", "workspace", "@myapp/api", "test:e2e"]

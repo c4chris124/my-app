@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      // These paths are for TypeScript type-checking and editor IntelliSense.
+      // Yarn workspace symlinks handle runtime Node.js resolution separately.
+      "@myapp/shared":   ["packages/shared/src/index.ts"],
+      "@myapp/shared/*": ["packages/shared/src/*"]
+    }
+  }
+}

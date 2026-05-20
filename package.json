@@ -1,0 +1,26 @@
+{
+  "name": "myapp",
+  "private": true,
+  "packageManager": "yarn@4.14.1",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:api": "yarn workspace @myapp/api start:dev",
+    "dev:web": "yarn workspace @myapp/web dev",
+    "dev:all": "concurrently \"yarn dev:api\" \"yarn dev:web\"",
+    "build:all": "yarn workspaces foreach --topological-dev run build",
+    "docker:dev":       "docker compose -f docker/docker-compose.yml -f docker/docker-compose.dev.yml",
+    "docker:dev:all":   "yarn docker:dev --profile all up",
+    "docker:dev:api":   "yarn docker:dev --profile api up",
+    "docker:dev:infra": "yarn docker:dev --profile infrastructure up",
+    "docker:dev:web":   "yarn docker:dev --profile web up",
+    "docker:prod":      "docker compose -f docker/docker-compose.yml -f docker/docker-compose.prod.yml --profile all up -d",
+    "docker:test":      "docker compose -f docker/docker-compose.yml -f docker/docker-compose.test.yml --profile all up --abort-on-container-exit --exit-code-from api"
+  },
+  "devDependencies": {
+    "concurrently": "^9.x.x",
+    "typescript": "^6.x.x"
+  }
+}
