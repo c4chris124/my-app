@@ -2,7 +2,7 @@
 # Manual changes might be lost - proceed with caution!
 
 __metadata:
-  version: 9
+  version: 10
   cacheKey: 10c0
 
 "@angular-devkit/core@npm:19.2.24":
@@ -1263,6 +1263,70 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@myapp/api@workspace:apps/api":
+  version: 0.0.0-use.local
+  resolution: "@myapp/api@workspace:apps/api"
+  dependencies:
+    "@eslint/eslintrc": "npm:^3.3.5"
+    "@eslint/js": "npm:^10.0.1"
+    "@myapp/shared": "workspace:*"
+    "@nestjs/cli": "npm:^11.0.21"
+    "@nestjs/common": "npm:^11.1.19"
+    "@nestjs/core": "npm:^11.1.19"
+    "@nestjs/platform-express": "npm:^11.1.19"
+    "@nestjs/schematics": "npm:^11.1.0"
+    "@nestjs/testing": "npm:^11.1.19"
+    "@types/express": "npm:^5.0.6"
+    "@types/jest": "npm:^30.0.0"
+    "@types/node": "npm:^25.7.0"
+    "@types/supertest": "npm:^7.2.0"
+    eslint: "npm:^10.3.0"
+    eslint-config-prettier: "npm:^10.1.8"
+    eslint-plugin-prettier: "npm:^5.5.5"
+    globals: "npm:^17.6.0"
+    jest: "npm:^30.4.2"
+    prettier: "npm:^3.8.3"
+    reflect-metadata: "npm:^0.2.2"
+    rxjs: "npm:^7.8.2"
+    source-map-support: "npm:^0.5.21"
+    supertest: "npm:^7.2.2"
+    ts-jest: "npm:^29.4.9"
+    ts-loader: "npm:^9.5.7"
+    ts-node: "npm:^10.9.2"
+    tsconfig-paths: "npm:^4.2.0"
+    typescript: "npm:^6.0.3"
+    typescript-eslint: "npm:^8.59.3"
+  languageName: unknown
+  linkType: soft
+
+"@myapp/shared@workspace:*, @myapp/shared@workspace:packages/shared":
+  version: 0.0.0-use.local
+  resolution: "@myapp/shared@workspace:packages/shared"
+  languageName: unknown
+  linkType: soft
+
+"@myapp/web@workspace:apps/web":
+  version: 0.0.0-use.local
+  resolution: "@myapp/web@workspace:apps/web"
+  dependencies:
+    "@eslint/js": "npm:^10.0.1"
+    "@myapp/shared": "workspace:*"
+    "@types/node": "npm:^25.7.0"
+    "@types/react": "npm:^19.2.14"
+    "@types/react-dom": "npm:^19.2.3"
+    "@vitejs/plugin-react": "npm:^6.0.1"
+    eslint: "npm:^10.3.0"
+    eslint-plugin-react-hooks: "npm:^7.1.1"
+    eslint-plugin-react-refresh: "npm:^0.5.2"
+    globals: "npm:^17.6.0"
+    react: "npm:^19.2.6"
+    react-dom: "npm:^19.2.6"
+    typescript: "npm:~6.0.3"
+    typescript-eslint: "npm:^8.59.3"
+    vite: "npm:^8.0.12"
+  languageName: unknown
+  linkType: soft
+
 "@napi-rs/wasm-runtime@npm:^0.2.11":
   version: 0.2.12
   resolution: "@napi-rs/wasm-runtime@npm:0.2.12"
@@ -1474,68 +1538,6 @@ __metadata:
   checksum: 10c0/ac8e4e8138b1a7a4ac6282873aef7389c352f1f8b577b4850778f5182e4a39a5241facbe48361fec817f56d02b51691b383010843fb08b34a8e8ea3614688fd5
   languageName: node
   linkType: hard
-
-"@rehobotapp/api@workspace:apps/api":
-  version: 0.0.0-use.local
-  resolution: "@rehobotapp/api@workspace:apps/api"
-  dependencies:
-    "@eslint/eslintrc": "npm:^3.3.5"
-    "@eslint/js": "npm:^10.0.1"
-    "@nestjs/cli": "npm:^11.0.21"
-    "@nestjs/common": "npm:^11.1.19"
-    "@nestjs/core": "npm:^11.1.19"
-    "@nestjs/platform-express": "npm:^11.1.19"
-    "@nestjs/schematics": "npm:^11.1.0"
-    "@nestjs/testing": "npm:^11.1.19"
-    "@types/express": "npm:^5.0.6"
-    "@types/jest": "npm:^30.0.0"
-    "@types/node": "npm:^25.7.0"
-    "@types/supertest": "npm:^7.2.0"
-    eslint: "npm:^10.3.0"
-    eslint-config-prettier: "npm:^10.1.8"
-    eslint-plugin-prettier: "npm:^5.5.5"
-    globals: "npm:^17.6.0"
-    jest: "npm:^30.4.2"
-    prettier: "npm:^3.8.3"
-    reflect-metadata: "npm:^0.2.2"
-    rxjs: "npm:^7.8.2"
-    source-map-support: "npm:^0.5.21"
-    supertest: "npm:^7.2.2"
-    ts-jest: "npm:^29.4.9"
-    ts-loader: "npm:^9.5.7"
-    ts-node: "npm:^10.9.2"
-    tsconfig-paths: "npm:^4.2.0"
-    typescript: "npm:^6.0.3"
-    typescript-eslint: "npm:^8.59.3"
-  languageName: unknown
-  linkType: soft
-
-"@rehobotapp/shared@workspace:packages/shared":
-  version: 0.0.0-use.local
-  resolution: "@rehobotapp/shared@workspace:packages/shared"
-  languageName: unknown
-  linkType: soft
-
-"@rehook/web@workspace:apps/web":
-  version: 0.0.0-use.local
-  resolution: "@rehook/web@workspace:apps/web"
-  dependencies:
-    "@eslint/js": "npm:^10.0.1"
-    "@types/node": "npm:^25.7.0"
-    "@types/react": "npm:^19.2.14"
-    "@types/react-dom": "npm:^19.2.3"
-    "@vitejs/plugin-react": "npm:^6.0.1"
-    eslint: "npm:^10.3.0"
-    eslint-plugin-react-hooks: "npm:^7.1.1"
-    eslint-plugin-react-refresh: "npm:^0.5.2"
-    globals: "npm:^17.6.0"
-    react: "npm:^19.2.6"
-    react-dom: "npm:^19.2.6"
-    typescript: "npm:~6.0.3"
-    typescript-eslint: "npm:^8.59.3"
-    vite: "npm:^8.0.12"
-  languageName: unknown
-  linkType: soft
 
 "@rolldown/binding-android-arm64@npm:1.0.0":
   version: 1.0.0
@@ -5674,6 +5676,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"myapp@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "myapp@workspace:."
+  dependencies:
+    concurrently: "npm:^9.x.x"
+    typescript: "npm:^6.x.x"
+  languageName: unknown
+  linkType: soft
+
 "nanoid@npm:^3.3.11":
   version: 3.3.12
   resolution: "nanoid@npm:3.3.12"
@@ -6202,15 +6213,6 @@ __metadata:
   checksum: 10c0/1cd93a15ea291e420204955544637c264c216e7aac527470e393d54b4bb075f10a17e60d8168ec96600c7e0b9fcc0cb0bb6e91c3fbf5b0d8c9056f04e6ac1ec2
   languageName: node
   linkType: hard
-
-"rehobot-gt@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "rehobot-gt@workspace:."
-  dependencies:
-    concurrently: "npm:^9.x.x"
-    typescript: "npm:^6.x.x"
-  languageName: unknown
-  linkType: soft
 
 "require-directory@npm:^2.1.1":
   version: 2.1.1
