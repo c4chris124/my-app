@@ -55,15 +55,15 @@ describe("i18n translations are configured", () => {
 
   const locales = ["es", "en"] as const;
 
-  it.each(locales)("has a %s/common.json locale file", (lng) => {
-    expect(existsSync(resolve(root, `public/locales/${lng}/common.json`))).toBe(
-      true,
-    );
+  it.each(locales)("has a %s/translation.json locale file", (lng) => {
+    expect(
+      existsSync(resolve(root, `public/locales/${lng}/translation.json`)),
+    ).toBe(true);
   });
 
   it("has matching keys across all locales", () => {
     const keysByLng = locales.map((lng) =>
-      Object.keys(readJson(`public/locales/${lng}/common.json`)).sort(),
+      Object.keys(readJson(`public/locales/${lng}/translation.json`)).sort(),
     );
     // every locale exposes the same set of translation keys
     for (const keys of keysByLng) {

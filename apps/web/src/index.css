@@ -1,3 +1,139 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;500;700&family=Syne:wght@500;600;700&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/*
+  Industrial Excellence — design tokens.
+  Colors are stored as space-separated RGB channels so Tailwind can apply
+  opacity modifiers via rgb(var(--token) / <alpha-value>).
+  :root = light theme (from brand spec). .dark = derived dark theme.
+*/
+@layer base {
+  :root {
+    --surface: 252 249 248;
+    --surface-dim: 220 217 217;
+    --surface-bright: 252 249 248;
+    --surface-container-lowest: 255 255 255;
+    --surface-container-low: 246 243 242;
+    --surface-container: 240 237 236;
+    --surface-container-high: 235 231 231;
+    --surface-container-highest: 229 226 225;
+    --surface-variant: 229 226 225;
+    --on-surface: 28 27 27;
+    --on-surface-variant: 68 70 79;
+
+    --inverse-surface: 49 48 48;
+    --inverse-on-surface: 243 240 239;
+    --inverse-primary: 178 197 255;
+
+    --outline: 117 119 128;
+    --outline-variant: 197 198 209;
+
+    --primary: 0 5 25;
+    --on-primary: 255 255 255;
+    --primary-container: 0 27 78;
+    --on-primary-container: 113 133 189;
+
+    --secondary: 35 88 195;
+    --on-secondary: 255 255 255;
+    --secondary-container: 102 145 255;
+    --on-secondary-container: 0 41 111;
+
+    --tertiary: 18 2 0;
+    --on-tertiary: 255 255 255;
+    --tertiary-container: 62 14 0;
+    --on-tertiary-container: 191 114 88;
+
+    --error: 186 26 26;
+    --on-error: 255 255 255;
+    --error-container: 255 218 214;
+    --on-error-container: 147 0 10;
+
+    --background: 252 249 248;
+    --on-background: 28 27 27;
+
+    /* Brand additions: Energy Yellow + status colors */
+    --accent: 255 196 0;
+    --on-accent: 17 17 17;
+    --status-available: 31 138 59;
+    --status-out: 198 40 40;
+    --status-limited: 255 196 0;
+  }
+
+  .dark {
+    --surface: 19 19 22;
+    --surface-dim: 19 19 22;
+    --surface-bright: 58 57 60;
+    --surface-container-lowest: 14 14 16;
+    --surface-container-low: 27 27 30;
+    --surface-container: 31 31 34;
+    --surface-container-high: 42 41 45;
+    --surface-container-highest: 53 52 56;
+    --surface-variant: 68 70 79;
+    --on-surface: 229 226 225;
+    --on-surface-variant: 197 198 209;
+
+    --inverse-surface: 229 226 225;
+    --inverse-on-surface: 49 48 48;
+    --inverse-primary: 0 27 78;
+
+    --outline: 143 144 153;
+    --outline-variant: 68 70 79;
+
+    --primary: 178 197 255;
+    --on-primary: 0 24 72;
+    --primary-container: 48 69 121;
+    --on-primary-container: 218 226 255;
+
+    --secondary: 173 198 255;
+    --on-secondary: 0 46 106;
+    --secondary-container: 0 64 162;
+    --on-secondary-container: 218 226 255;
+
+    --tertiary: 255 181 156;
+    --on-tertiary: 90 26 7;
+    --tertiary-container: 114 53 31;
+    --on-tertiary-container: 255 219 207;
+
+    --error: 255 180 171;
+    --on-error: 105 0 5;
+    --error-container: 147 0 10;
+    --on-error-container: 255 218 214;
+
+    --background: 19 19 22;
+    --on-background: 229 226 225;
+
+    --accent: 255 196 0;
+    --on-accent: 17 17 17;
+    --status-available: 47 164 90;
+    --status-out: 229 72 77;
+    --status-limited: 255 196 0;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-background text-on-background font-body text-body-md;
+  }
+
+  /* Warehouse-signage headings: condensed, uppercase. */
+  h1,
+  h2,
+  h3 {
+    @apply font-heading uppercase;
+  }
+
+  /* Smooth the theme switch. */
+  body,
+  body * {
+    transition:
+      background-color 150ms ease,
+      border-color 150ms ease,
+      color 150ms ease;
+  }
+}
