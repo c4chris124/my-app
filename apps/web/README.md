@@ -98,10 +98,20 @@ class on `<html>`, persisting the choice to `localStorage`.
 
 ## Internationalization
 
-i18next + react-i18next, configured in [`src/i18n.ts`](src/i18n.ts). Translation files
-are static JSON under [`public/locales/<lng>/translation.json`](public/locales) (`es`, `en`),
-with Spanish as the fallback. Add a key to every locale file, then read it with
-`const { t } = useTranslation(); t("yourKey")`.
+i18next + react-i18next, configured in [`src/i18n.ts`](src/i18n.ts), with Spanish (`es`)
+as the fallback and English (`en`) alongside. Translation files are static JSON under
+[`public/locales/<lng>/<ns>.json`](public/locales), split into namespaces:
+`translation` (default), `common`, `ecommerce`, and `crm`.
+
+Add a key to the relevant namespace in **every** locale, then read it with
+`useTranslation()` for the default namespace or `useTranslation("<ns>")` for a specific
+one:
+
+```ts
+const { t } = useTranslation();        // default `translation` namespace
+const { t } = useTranslation("crm");   // the `crm` namespace
+t("yourKey");
+```
 
 ## Tech stack
 
