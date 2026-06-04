@@ -5,7 +5,7 @@ import LandingPage from "./pages/LandingPage";
 
 // Domain modules are code-split so the storefront/CRM ship as separate chunks.
 const EcommerceModule = lazy(() => import("./modules/ecommerce"));
-// const CRMModule = lazy(() => import("./modules/crm"));
+const CrmModule = lazy(() => import("./modules/crm"));
 
 function App() {
   return (
@@ -14,7 +14,7 @@ function App() {
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/ecommerce/*" element={<EcommerceModule />} />
-          {/* <Route path="/crm/*" element={<CRMModule />} /> */}
+          <Route path="/crm/*" element={<CrmModule />} />
         </Routes>
       </Suspense>
     </BrowserRouter>

@@ -51,10 +51,16 @@ export default function LandingPage() {
       </main>
 
       <footer className="border-t-2 border-on-surface bg-inverse-surface">
-        <div className="mx-auto max-w-container px-margin-mobile py-stack-lg md:px-margin-desktop">
+        <div className="mx-auto flex max-w-container flex-wrap items-center justify-between gap-stack-md px-margin-mobile py-stack-lg md:px-margin-desktop">
           <p className="font-body text-label-sm uppercase tracking-widest text-inverse-on-surface">
             REHOBOT · Industrial Excellence · Light &amp; Dark Design System
           </p>
+          <Link
+            to="/crm/login"
+            className="font-body text-label-sm uppercase tracking-widest text-inverse-on-surface underline-offset-4 hover:underline"
+          >
+            Staff login
+          </Link>
         </div>
       </footer>
     </div>

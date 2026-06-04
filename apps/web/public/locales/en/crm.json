@@ -1,0 +1,88 @@
+{
+  "nav": {
+    "dashboard": "Dashboard",
+    "orders": "Orders",
+    "customers": "Customers",
+    "catalogs": "Catalogs"
+  },
+  "actions": {
+    "logout": "Log out"
+  },
+  "login": {
+    "title": "Staff sign-in",
+    "subtitle": "Access the REHOBOT operations console.",
+    "email": "Email",
+    "password": "Password",
+    "submit": "Sign in",
+    "submitting": "Signing in…",
+    "failed": "Sign-in failed. Check your credentials and try again.",
+    "errorEmail": "Enter a valid email address.",
+    "errorPassword": "Password is required.",
+    "demoHint": "Demo mode: any valid email and any password will sign you in as an admin."
+  },
+  "dashboard": {
+    "metrics": "Key metrics",
+    "revenue": "Revenue",
+    "orders": "Orders",
+    "customers": "Customers",
+    "pending": "Pending orders",
+    "recentOrders": "Recent orders"
+  },
+  "orders": {
+    "count": "{{count}} orders",
+    "col": {
+      "id": "Order",
+      "customer": "Customer",
+      "date": "Date",
+      "status": "Status",
+      "items": "Items",
+      "total": "Total"
+    }
+  },
+  "orderStatus": {
+    "pending": "Pending",
+    "processing": "Processing",
+    "shipped": "Shipped",
+    "delivered": "Delivered",
+    "cancelled": "Cancelled"
+  },
+  "customers": {
+    "count": "{{count}} customers",
+    "col": {
+      "name": "Name",
+      "company": "Company",
+      "email": "Email",
+      "orders": "Orders",
+      "ltv": "Lifetime value",
+      "status": "Status"
+    }
+  },
+  "customerStatus": {
+    "active": "Active",
+    "lead": "Lead",
+    "inactive": "Inactive"
+  },
+  "catalogs": {
+    "active": "Active",
+    "inactive": "Inactive",
+    "tabs": {
+      "categories": "Categories",
+      "subcategories": "Subcategories",
+      "prices": "Prices",
+      "promotions": "Promotions"
+    },
+    "col": {
+      "name": "Name",
+      "category": "Category",
+      "subcategories": "Subcategories",
+      "products": "Products",
+      "rule": "Rule",
+      "scope": "Scope",
+      "adjustment": "Adjustment",
+      "code": "Code",
+      "description": "Description",
+      "discount": "Discount",
+      "status": "Status"
+    }
+  }
+}

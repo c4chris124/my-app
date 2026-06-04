@@ -1,0 +1,88 @@
+{
+  "nav": {
+    "dashboard": "Panel",
+    "orders": "Pedidos",
+    "customers": "Clientes",
+    "catalogs": "Catálogos"
+  },
+  "actions": {
+    "logout": "Cerrar sesión"
+  },
+  "login": {
+    "title": "Acceso de personal",
+    "subtitle": "Accede a la consola de operaciones de REHOBOT.",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "submit": "Entrar",
+    "submitting": "Entrando…",
+    "failed": "Error de acceso. Revisa tus credenciales e inténtalo de nuevo.",
+    "errorEmail": "Introduce un correo electrónico válido.",
+    "errorPassword": "La contraseña es obligatoria.",
+    "demoHint": "Modo demo: cualquier correo válido y cualquier contraseña te dará acceso como administrador."
+  },
+  "dashboard": {
+    "metrics": "Métricas clave",
+    "revenue": "Ingresos",
+    "orders": "Pedidos",
+    "customers": "Clientes",
+    "pending": "Pedidos pendientes",
+    "recentOrders": "Pedidos recientes"
+  },
+  "orders": {
+    "count": "{{count}} pedidos",
+    "col": {
+      "id": "Pedido",
+      "customer": "Cliente",
+      "date": "Fecha",
+      "status": "Estado",
+      "items": "Artículos",
+      "total": "Total"
+    }
+  },
+  "orderStatus": {
+    "pending": "Pendiente",
+    "processing": "En proceso",
+    "shipped": "Enviado",
+    "delivered": "Entregado",
+    "cancelled": "Cancelado"
+  },
+  "customers": {
+    "count": "{{count}} clientes",
+    "col": {
+      "name": "Nombre",
+      "company": "Empresa",
+      "email": "Correo",
+      "orders": "Pedidos",
+      "ltv": "Valor de vida",
+      "status": "Estado"
+    }
+  },
+  "customerStatus": {
+    "active": "Activo",
+    "lead": "Prospecto",
+    "inactive": "Inactivo"
+  },
+  "catalogs": {
+    "active": "Activa",
+    "inactive": "Inactiva",
+    "tabs": {
+      "categories": "Categorías",
+      "subcategories": "Subcategorías",
+      "prices": "Precios",
+      "promotions": "Promociones"
+    },
+    "col": {
+      "name": "Nombre",
+      "category": "Categoría",
+      "subcategories": "Subcategorías",
+      "products": "Productos",
+      "rule": "Regla",
+      "scope": "Alcance",
+      "adjustment": "Ajuste",
+      "code": "Código",
+      "description": "Descripción",
+      "discount": "Descuento",
+      "status": "Estado"
+    }
+  }
+}

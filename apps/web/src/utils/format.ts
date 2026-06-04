@@ -17,3 +17,16 @@ export function formatPrice(
     return `${currency} ${amount}`;
   }
 }
+
+/** Format an ISO date string for the active locale (e.g. "4 Jun 2026"). */
+export function formatDate(iso: string, locale: string): string {
+  try {
+    return new Intl.DateTimeFormat(locale, {
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+    }).format(new Date(iso));
+  } catch {
+    return iso;
+  }
+}

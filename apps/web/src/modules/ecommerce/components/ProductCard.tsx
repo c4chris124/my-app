@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { StatusChip } from "../../../components/StatusChip";
 import { Button } from "../../../components/Button";
-import { formatPrice } from "../utils/format";
+import { formatPrice } from "../../../utils/format";
 import type { Product } from "../data/types";
 
 export function ProductCard({ product }: { product: Product }) {
