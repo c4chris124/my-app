@@ -16,9 +16,9 @@ import { useCategories } from "../services/queries";
 import { CATEGORY_ICONS } from "../data/icons";
 
 const NAV_LINKS = [
-  { to: "/ecommerce", labelKey: "nav.home", end: true },
+  // { to: "/ecommerce", labelKey: "nav.home", end: true },
   { to: "/ecommerce/products", labelKey: "nav.products", end: false },
-  { to: "/ecommerce/cart", labelKey: "nav.cart", end: false },
+  // { to: "/ecommerce/cart", labelKey: "nav.cart", end: false },
 ] as const;
 
 /** Below this width (Tailwind `lg`) we render the compact, toggle-driven bar. */
@@ -64,8 +64,9 @@ export function EcommerceNavbar() {
   const searchOpen = openPanel === "search";
   const menuOpen = openPanel === "menu";
 
-  const toggleSearch = () => setOpenPanel((p) => (p === "search" ? null : "search"));
-  const toggleMenu = () => setOpenPanel((p) => (p === "menu" ? null : "menu"));
+  const toggleSearch = () =>
+    setOpenPanel(p => (p === "search" ? null : "search"));
+  const toggleMenu = () => setOpenPanel(p => (p === "menu" ? null : "menu"));
   const closePanels = () => setOpenPanel(null);
 
   // ── Mobile: move keyboard focus into the search field when it opens, so the
@@ -136,7 +137,7 @@ export function EcommerceNavbar() {
 
         {/* Desktop primary nav — unchanged, lg+ only. */}
         <nav className="hidden items-center gap-stack-lg lg:flex">
-          {NAV_LINKS.map((link) => (
+          {NAV_LINKS.map(link => (
             <NavLink
               key={link.to}
               to={link.to}
@@ -240,7 +241,7 @@ export function EcommerceNavbar() {
               id={`${searchPanelId}-input`}
               type="search"
               value={query}
-              onChange={(e) => setQuery(e.target.value)}
+              onChange={e => setQuery(e.target.value)}
               placeholder={t("search.placeholder")}
               className="h-12 flex-1 border-2 border-on-surface bg-surface px-stack-md font-body text-body-md text-on-surface placeholder:text-on-surface-variant focus:shadow-pressed focus:outline-none"
             />
@@ -272,7 +273,7 @@ export function EcommerceNavbar() {
               aria-label={t("nav.menu")}
               className="flex flex-col gap-stack-xs"
             >
-              {NAV_LINKS.map((link) => (
+              {NAV_LINKS.map(link => (
                 <NavLink
                   key={link.to}
                   to={link.to}
