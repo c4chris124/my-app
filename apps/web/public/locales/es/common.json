@@ -1,0 +1,7 @@
+{
+  "state": {
+    "errorTitle": "No se pudo cargar",
+    "errorBody": "Hubo un problema al cargar esta sección. Inténtalo de nuevo.",
+    "retry": "Reintentar"
+  }
+}

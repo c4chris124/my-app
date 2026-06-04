@@ -1,8 +1,8 @@
 import { useTranslation } from "react-i18next";
 import { MdFormatQuote } from "react-icons/md";
 import { useTestimonials } from "../services/queries";
-import { Skeleton } from "./Skeleton";
-import { ErrorState } from "./ErrorState";
+import { Skeleton } from "../../../components/Skeleton";
+import { ErrorState } from "../../../components/ErrorState";
 
 /**
  * "Our customers" — social proof from previous buyers, fetched via React Query.

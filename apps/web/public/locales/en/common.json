@@ -1,0 +1,7 @@
+{
+  "state": {
+    "errorTitle": "Couldn't load",
+    "errorBody": "Something went wrong fetching this section. Please try again.",
+    "retry": "Retry"
+  }
+}

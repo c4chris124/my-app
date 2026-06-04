@@ -2,8 +2,8 @@ import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useCategories } from "../services/queries";
 import { CATEGORY_ICONS } from "../data/icons";
-import { Skeleton } from "./Skeleton";
-import { ErrorState } from "./ErrorState";
+import { Skeleton } from "../../../components/Skeleton";
+import { ErrorState } from "../../../components/ErrorState";
 
 /**
  * Left-hand category rail. Sticks below the navbar on desktop; on mobile it

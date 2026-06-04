@@ -1,10 +1,13 @@
 import { useTranslation } from "react-i18next";
 import { MdErrorOutline } from "react-icons/md";
-import { Button } from "../../../components/Button";
+import { Button } from "./Button";
 
-/** Inline error block with a retry action, used by data-driven sections. */
+/**
+ * Inline error block with a retry action, shared by data-driven sections across
+ * modules. Copy lives in the `common` i18n namespace.
+ */
 export function ErrorState({ onRetry }: { onRetry: () => void }) {
-  const { t } = useTranslation("ecommerce");
+  const { t } = useTranslation("common");
 
   return (
     <div className="flex flex-col items-start gap-stack-md border-2 border-error bg-error-container/20 p-stack-lg">
@@ -17,7 +20,11 @@ export function ErrorState({ onRetry }: { onRetry: () => void }) {
       <p className="font-body text-body-md text-on-surface-variant">
         {t("state.errorBody")}
       </p>
-      <Button variant="secondary" onClick={onRetry} className="h-10 text-headline-md">
+      <Button
+        variant="secondary"
+        onClick={onRetry}
+        className="h-10 text-headline-md"
+      >
         {t("state.retry")}
       </Button>
     </div>

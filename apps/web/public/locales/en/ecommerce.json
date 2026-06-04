@@ -33,11 +33,6 @@
     "addToCart": "Add",
     "soldOut": "Sold out"
   },
-  "state": {
-    "errorTitle": "Couldn't load",
-    "errorBody": "Something went wrong fetching this section. Please try again.",
-    "retry": "Retry"
-  },
   "customers": {
     "title": "Trusted by professional kitchens"
   },

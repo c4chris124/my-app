@@ -1,8 +1,8 @@
 import { useTranslation } from "react-i18next";
 import { MdAdd, MdRemove } from "react-icons/md";
 import { useFaq } from "../services/queries";
-import { Skeleton } from "./Skeleton";
-import { ErrorState } from "./ErrorState";
+import { Skeleton } from "../../../components/Skeleton";
+import { ErrorState } from "../../../components/ErrorState";
 
 /**
  * Accessible FAQ accordion built on native <details>/<summary> — no JS state,

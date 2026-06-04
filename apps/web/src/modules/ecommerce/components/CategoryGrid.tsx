@@ -3,8 +3,8 @@ import { useTranslation } from "react-i18next";
 import { MdArrowForward } from "react-icons/md";
 import { useCategories } from "../services/queries";
 import { CATEGORY_ICONS } from "../data/icons";
-import { Skeleton } from "./Skeleton";
-import { ErrorState } from "./ErrorState";
+import { Skeleton } from "../../../components/Skeleton";
+import { ErrorState } from "../../../components/ErrorState";
 
 /**
  * Icon-led category tiles — the primary "browse by department" entry point on

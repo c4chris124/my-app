@@ -1,8 +1,8 @@
 import { useTranslation } from "react-i18next";
 import { useRecommendedProducts } from "../services/queries";
 import { ProductCard } from "./ProductCard";
-import { Skeleton } from "./Skeleton";
-import { ErrorState } from "./ErrorState";
+import { Skeleton } from "../../../components/Skeleton";
+import { ErrorState } from "../../../components/ErrorState";
 
 /**
  * "Recommended for you" — a curated row of products fetched from the catalog
