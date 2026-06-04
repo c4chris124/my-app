@@ -108,22 +108,37 @@ export default function Catalogs() {
 
   return (
     <div className="space-y-stack-lg">
-      <div className="flex flex-wrap gap-stack-sm border-b-2 border-outline-variant">
-        {TABS.map(({ key, labelKey }) => (
-          <button
-            key={key}
-            type="button"
-            onClick={() => setTab(key)}
-            aria-pressed={tab === key}
-            className={`-mb-0.5 border-b-2 px-stack-md py-stack-sm font-heading text-headline-md uppercase tracking-wide transition ${
-              tab === key
-                ? "border-accent text-on-surface"
-                : "border-transparent text-on-surface-variant hover:text-on-surface"
-            }`}
-          >
-            {t(labelKey)}
-          </button>
-        ))}
+      {/* Tabs. On mobile (< lg) they become a full-bleed, sticky, horizontally
+          scrollable strip (scrollbar hidden) so the four labels never wrap or
+          cramp; the negative margin cancels <main>'s padding to reach the screen
+          edges. From lg up it reverts to the original static, wrapping bar. */}
+      <div className="-mx-margin-mobile sticky top-0 z-30 overflow-x-auto border-b-2 border-outline-variant bg-surface scrollbar-hide lg:static lg:mx-0 lg:overflow-visible lg:bg-transparent">
+        <nav className="flex gap-stack-sm px-margin-mobile lg:flex-wrap lg:px-0">
+          {TABS.map(({ key, labelKey }) => {
+            const active = tab === key;
+            return (
+              <button
+                key={key}
+                type="button"
+                onClick={() => setTab(key)}
+                aria-pressed={active}
+                className={`flex shrink-0 flex-col items-center border-b-4 px-6 py-4 transition lg:-mb-0.5 lg:flex-row lg:border-b-2 lg:px-stack-md lg:py-stack-sm ${
+                  active
+                    ? "border-accent bg-surface-high text-primary lg:bg-transparent lg:text-on-surface"
+                    : "border-transparent text-on-surface-variant opacity-70 hover:opacity-100 lg:opacity-100 lg:hover:text-on-surface"
+                }`}
+              >
+                <span
+                  className={`font-heading text-headline-md uppercase tracking-widest lg:tracking-wide ${
+                    active ? "font-bold lg:font-normal" : ""
+                  }`}
+                >
+                  {t(labelKey)}
+                </span>
+              </button>
+            );
+          })}
+        </nav>
       </div>
 
       {isPending ? (

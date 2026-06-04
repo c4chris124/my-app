@@ -1,28 +1,17 @@
 import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import {
-  MdSpaceDashboard,
-  MdReceiptLong,
-  MdGroup,
-  MdInventory2,
-} from "react-icons/md";
-
-const NAV_ITEMS = [
-  { to: "/crm/dashboard", labelKey: "nav.dashboard", icon: MdSpaceDashboard },
-  { to: "/crm/orders", labelKey: "nav.orders", icon: MdReceiptLong },
-  { to: "/crm/customers", labelKey: "nav.customers", icon: MdGroup },
-  { to: "/crm/catalogs", labelKey: "nav.catalogs", icon: MdInventory2 },
-] as const;
+import { CRM_NAV_ITEMS } from "../data/navItems";
 
 /**
- * Fixed dashboard navigation rail. Collapses to a top strip on small screens.
+ * Fixed dashboard navigation rail — desktop only (lg+). Below lg the same nav
+ * lives in the CrmTopbar hamburger menu, so the rail is hidden there.
  */
 export function CrmSidebar() {
   const { t } = useTranslation("crm");
 
   return (
-    <aside className="border-b-2 border-on-surface bg-surface-container lg:w-64 lg:shrink-0 lg:border-b-0 lg:border-r-2">
-      <div className="flex items-center gap-stack-sm border-on-surface px-margin-mobile py-stack-md lg:border-b-2 lg:px-stack-lg">
+    <aside className="hidden bg-surface-container lg:block lg:w-64 lg:shrink-0 lg:border-r-2 lg:border-on-surface">
+      <div className="flex items-center gap-stack-sm border-b-2 border-on-surface px-stack-lg py-stack-md">
         <span className="font-display text-headline-lg text-on-surface">
           REHOBOT
         </span>
@@ -30,8 +19,8 @@ export function CrmSidebar() {
           CRM
         </span>
       </div>
-      <nav className="flex gap-stack-xs overflow-x-auto px-margin-mobile py-stack-sm lg:flex-col lg:overflow-visible lg:p-stack-md">
-        {NAV_ITEMS.map(({ to, labelKey, icon: Icon }) => (
+      <nav className="flex flex-col gap-stack-xs p-stack-md">
+        {CRM_NAV_ITEMS.map(({ to, labelKey, icon: Icon }) => (
           <NavLink
             key={to}
             to={to}

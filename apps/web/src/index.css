@@ -4,6 +4,18 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Hide the scrollbar while keeping the element scrollable — used by the
+   horizontally scrollable tab strips on mobile. */
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none; /* IE/Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none; /* Chrome/Safari */
+  }
+}
+
 /*
   Industrial Excellence — design tokens.
   Colors are stored as space-separated RGB channels so Tailwind can apply

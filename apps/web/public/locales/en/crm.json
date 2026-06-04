@@ -3,7 +3,10 @@
     "dashboard": "Dashboard",
     "orders": "Orders",
     "customers": "Customers",
-    "catalogs": "Catalogs"
+    "catalogs": "Catalogs",
+    "menu": "Menu",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
   },
   "actions": {
     "logout": "Log out"

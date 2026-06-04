@@ -3,7 +3,10 @@
     "dashboard": "Panel",
     "orders": "Pedidos",
     "customers": "Clientes",
-    "catalogs": "Catálogos"
+    "catalogs": "Catálogos",
+    "menu": "Menú",
+    "openMenu": "Abrir menú",
+    "closeMenu": "Cerrar menú"
   },
   "actions": {
     "logout": "Cerrar sesión"

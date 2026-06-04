@@ -4,7 +4,17 @@
     "home": "Inicio",
     "products": "Productos",
     "cart": "Carrito",
-    "account": "Cuenta"
+    "account": "Cuenta",
+    "menu": "Menú",
+    "openMenu": "Abrir menú",
+    "closeMenu": "Cerrar menú",
+    "openSearch": "Abrir búsqueda",
+    "closeSearch": "Cerrar búsqueda"
+  },
+  "search": {
+    "label": "Buscar productos",
+    "placeholder": "Buscar productos…",
+    "submit": "Buscar"
   },
   "hero": {
     "eyebrow": "Producto y Equipamiento",
