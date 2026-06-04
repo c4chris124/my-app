@@ -1,0 +1,80 @@
+{
+  "tagline": "Industrial kitchen equipment",
+  "nav": {
+    "home": "Home",
+    "products": "Products",
+    "cart": "Cart",
+    "account": "Account"
+  },
+  "hero": {
+    "eyebrow": "Product and Equipment",
+    "title": "Built for the line",
+    "subtitle": "Heavy-duty machinery, engineered for high-stakes commercial kitchens. Browse by department or explore our most-specified gear."
+  },
+  "sidebar": {
+    "title": "Departments"
+  },
+  "categories": {
+    "title": "Shop by category",
+    "browse": "Browse",
+    "count": "{{count}} products",
+    "cooking": "Cooking",
+    "refrigeration": "Refrigeration",
+    "foodPrep": "Food Prep",
+    "warewashing": "Warewashing",
+    "storage": "Storage",
+    "ventilation": "Ventilation"
+  },
+  "recommended": {
+    "title": "Recommended for you",
+    "subtitle": "Our most-specified machines"
+  },
+  "product": {
+    "addToCart": "Add",
+    "soldOut": "Sold out"
+  },
+  "state": {
+    "errorTitle": "Couldn't load",
+    "errorBody": "Something went wrong fetching this section. Please try again.",
+    "retry": "Retry"
+  },
+  "customers": {
+    "title": "Trusted by professional kitchens"
+  },
+  "faq": {
+    "title": "Frequently asked questions",
+    "q1": {
+      "question": "Do you deliver and install?",
+      "answer": "Yes. Every order includes delivery to your loading bay, and certified installation is available across the mainland for an additional fee quoted at checkout."
+    },
+    "q2": {
+      "question": "What warranty do machines carry?",
+      "answer": "All REHOBOT equipment ships with a 2-year parts-and-labour warranty. Extended cover up to 5 years is available on cooking and refrigeration lines."
+    },
+    "q3": {
+      "question": "Can I get a custom specification?",
+      "answer": "Absolutely. Our engineering team can tailor dimensions, power ratings and finishes for fit-outs. Contact us with your floor plan to start a quote."
+    },
+    "q4": {
+      "question": "What are your lead times?",
+      "answer": "In-stock items dispatch within 48 hours. Made-to-order and custom units typically ship in 3-5 weeks depending on configuration."
+    }
+  },
+  "footer": {
+    "blurb": "REHOBOT builds heavy-duty commercial kitchen equipment, specified to the millimetre and engineered to last.",
+    "shop": { "title": "Shop" },
+    "company": {
+      "title": "Company",
+      "about": "About us",
+      "support": "Support",
+      "contact": "Contact"
+    },
+    "copyright": "© 2026 REHOBOT · Industrial Excellence"
+  },
+  "placeholder": {
+    "eyebrow": "Coming soon",
+    "body": "This page is under construction. Check back shortly while we finish wiring it up.",
+    "category": "Category",
+    "product": "Product"
+  }
+}

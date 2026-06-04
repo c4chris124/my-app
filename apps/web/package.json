@@ -19,6 +19,8 @@
   "dependencies": {
     "@hookform/resolvers": "^5.4.0",
     "@myapp/shared": "workspace:*",
+    "@tanstack/react-query": "^5.101.0",
+    "@tanstack/react-query-devtools": "^5.101.0",
     "@tanstack/react-table": "^8.21.3",
     "axios": "^1.17.0",
     "clsx": "^2.1.1",
@@ -76,5 +78,10 @@
   },
   "installConfig": {
     "hoistingLimits": "workspaces"
+  },
+  "msw": {
+    "workerDirectory": [
+      "public"
+    ]
   }
 }

@@ -1,0 +1,80 @@
+{
+  "tagline": "Equipamiento industrial de cocina",
+  "nav": {
+    "home": "Inicio",
+    "products": "Productos",
+    "cart": "Carrito",
+    "account": "Cuenta"
+  },
+  "hero": {
+    "eyebrow": "Producto y Equipamiento",
+    "title": "Hecho para la línea",
+    "subtitle": "Maquinaria de alta resistencia, diseñada para cocinas comerciales exigentes. Explora por departamento o descubre nuestros equipos más solicitados."
+  },
+  "sidebar": {
+    "title": "Departamentos"
+  },
+  "categories": {
+    "title": "Comprar por categoría",
+    "browse": "Ver",
+    "count": "{{count}} productos",
+    "cooking": "Cocción",
+    "refrigeration": "Refrigeración",
+    "foodPrep": "Preparación",
+    "warewashing": "Lavado",
+    "storage": "Almacenaje",
+    "ventilation": "Ventilación"
+  },
+  "recommended": {
+    "title": "Recomendado para ti",
+    "subtitle": "Nuestras máquinas más solicitadas"
+  },
+  "product": {
+    "addToCart": "Añadir",
+    "soldOut": "Agotado"
+  },
+  "state": {
+    "errorTitle": "No se pudo cargar",
+    "errorBody": "Hubo un problema al cargar esta sección. Inténtalo de nuevo.",
+    "retry": "Reintentar"
+  },
+  "customers": {
+    "title": "La confianza de cocinas profesionales"
+  },
+  "faq": {
+    "title": "Preguntas frecuentes",
+    "q1": {
+      "question": "¿Realizan entrega e instalación?",
+      "answer": "Sí. Cada pedido incluye entrega en tu muelle de carga, y la instalación certificada está disponible en toda la península por un coste adicional que se indica en el pago."
+    },
+    "q2": {
+      "question": "¿Qué garantía tienen las máquinas?",
+      "answer": "Todo el equipamiento REHOBOT incluye 2 años de garantía de piezas y mano de obra. La cobertura ampliada hasta 5 años está disponible en líneas de cocción y refrigeración."
+    },
+    "q3": {
+      "question": "¿Puedo solicitar una especificación a medida?",
+      "answer": "Por supuesto. Nuestro equipo de ingeniería puede ajustar dimensiones, potencias y acabados para tu instalación. Contáctanos con tu plano para iniciar un presupuesto."
+    },
+    "q4": {
+      "question": "¿Cuáles son los plazos de entrega?",
+      "answer": "Los artículos en stock se envían en 48 horas. Las unidades a medida suelen enviarse en 3-5 semanas según la configuración."
+    }
+  },
+  "footer": {
+    "blurb": "REHOBOT fabrica equipamiento de cocina comercial de alta resistencia, especificado al milímetro y diseñado para durar.",
+    "shop": { "title": "Tienda" },
+    "company": {
+      "title": "Empresa",
+      "about": "Quiénes somos",
+      "support": "Soporte",
+      "contact": "Contacto"
+    },
+    "copyright": "© 2026 REHOBOT · Excelencia Industrial"
+  },
+  "placeholder": {
+    "eyebrow": "Próximamente",
+    "body": "Esta página está en construcción. Vuelve pronto mientras terminamos de configurarla.",
+    "category": "Categoría",
+    "product": "Producto"
+  }
+}
