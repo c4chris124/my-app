@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
 import heroImg from './assets/hero.png'
@@ -6,6 +7,7 @@ import './App.css'
 
 function App() {
   const [count, setCount] = useState(0)
+  const { t, i18n } = useTranslation()
 
   return (
     <>
@@ -16,7 +18,15 @@ function App() {
           <img src={viteLogo} className="vite" alt="Vite logo" />
         </div>
         <div>
-          <h1>Get started</h1>
+          <div className="lang-switch">
+            <button type="button" onClick={() => i18n.changeLanguage('es')}>
+              ES
+            </button>
+            <button type="button" onClick={() => i18n.changeLanguage('en')}>
+              EN
+            </button>
+          </div>
+          <h1>{t('welcome')}</h1>
           <p>
             Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
           </p>

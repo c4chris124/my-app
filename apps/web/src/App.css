@@ -182,3 +182,24 @@
     border-right-color: var(--border);
   }
 }
+
+.lang-switch {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.lang-switch button {
+  padding: 0.25rem 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: transparent;
+  cursor: pointer;
+}
+
+.lang-switch button:hover {
+  background: var(--border);
+}
