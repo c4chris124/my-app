@@ -2029,6 +2029,7 @@ __metadata:
     react-dom: "npm:^19.2.6"
     react-hook-form: "npm:^7.77.0"
     react-i18next: "npm:^17.0.8"
+    react-icons: "npm:^5.6.0"
     react-router-dom: "npm:^7.16.0"
     reselect: "npm:^5.2.0"
     storybook: "npm:^10.4.2"
@@ -2619,6 +2620,15 @@ __metadata:
   version: 1.0.0-next.29
   resolution: "@polka/url@npm:1.0.0-next.29"
   checksum: 10c0/0d58e081844095cb029d3c19a659bfefd09d5d51a2f791bc61eba7ea826f13d6ee204a8a448c2f5a855c17df07b37517373ff916dd05801063c0568ae9937684
+  languageName: node
+  linkType: hard
+
+"@react-icons/all-files@npm:^4.1.0":
+  version: 4.1.0
+  resolution: "@react-icons/all-files@npm:4.1.0"
+  peerDependencies:
+    react: "*"
+  checksum: 10c0/6327623b857ba2a9fdf835f2e7029feec7acdd53dc14163085789518d7e1323deb7db649b660d3bad3991285e8408238ad4d09c37b9a0ba7d2601dd74ac0ae56
   languageName: node
   linkType: hard
 
@@ -8570,6 +8580,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "myapp@workspace:."
   dependencies:
+    "@react-icons/all-files": "npm:^4.1.0"
     concurrently: "npm:^9.x.x"
     typescript: "npm:^6.x.x"
   languageName: unknown
@@ -9486,6 +9497,15 @@ __metadata:
     typescript:
       optional: true
   checksum: 10c0/4d13d396208927ed3c80eb62db011a98dae16d93fc951bb4cb220fc5a3a5dd2f0046244fdbd197f627f595230d6fa05cc5d1c6f52b6241acd63ff818dff63acb
+  languageName: node
+  linkType: hard
+
+"react-icons@npm:^5.6.0":
+  version: 5.6.0
+  resolution: "react-icons@npm:5.6.0"
+  peerDependencies:
+    react: "*"
+  checksum: 10c0/addba1ebfd45cdf7f69291d0c93df64fca1271cfdb66df657abd223e3451c73356b035f50e75858627dd182b02129596c79eaaaa45d32eb52658e443a992645c
   languageName: node
   linkType: hard
 

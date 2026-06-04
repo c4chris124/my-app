@@ -22,5 +22,8 @@
   "devDependencies": {
     "concurrently": "^9.x.x",
     "typescript": "^6.x.x"
+  },
+  "dependencies": {
+    "@react-icons/all-files": "^4.1.0"
   }
 }
