@@ -81,5 +81,39 @@
     "body": "This page is under construction. Check back shortly while we finish wiring it up.",
     "category": "Category",
     "product": "Product"
+  },
+  "about": {
+    "hero": {
+      "eyebrow": "Established precision",
+      "title": "Empowering the food industry"
+    },
+    "mission": {
+      "title": "Our mission",
+      "body": "To provide comprehensive solutions in industrial equipment and appliances for the bakery, pastry, and restaurant sectors, offering high-quality, durable, and technologically advanced products, along with reliable service that drives our clients' growth and efficiency."
+    },
+    "vision": {
+      "title": "Our vision",
+      "body": "To be the leading national distributor of equipment for the food industry, recognized for our innovation, wide variety of products, and commitment to the success and development of every business that trusts us."
+    },
+    "stats": {
+      "years": "Years exp",
+      "projects": "Projects",
+      "units": "Units sold",
+      "support": "Support"
+    },
+    "team": {
+      "eyebrow": "Driving innovation",
+      "title": "Our team",
+      "subtitle": "A dynamic group of specialists dedicated to delivering performance and precision in every industrial kitchen.",
+      "roles": {
+        "operations": "Operations Director",
+        "technical": "Technical Lead",
+        "logistics": "Logistics Manager"
+      }
+    },
+    "cta": {
+      "title": "Ready to upgrade your kitchen?",
+      "button": "Contact our specialists"
+    }
   }
 }
