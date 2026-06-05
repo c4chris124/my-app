@@ -10,7 +10,7 @@ const TONES: Record<BadgeTone, string> = {
   danger: "bg-status-out text-white",
 };
 
-/** Rectangular status pill, tone-coded. Used by order/customer tables. */
+/** Rounded status pill, tone-coded. Used by order/customer tables. */
 export function StatusBadge({
   tone,
   children,
@@ -20,7 +20,7 @@ export function StatusBadge({
 }) {
   return (
     <span
-      className={`inline-block px-stack-sm py-1 font-body text-label-sm font-bold uppercase tracking-wide ${TONES[tone]}`}
+      className={`inline-block rounded-full px-stack-sm py-1 font-body text-label-sm font-bold uppercase tracking-wide ${TONES[tone]}`}
     >
       {children}
     </span>

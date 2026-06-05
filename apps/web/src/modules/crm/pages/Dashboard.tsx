@@ -66,7 +66,7 @@ export default function Dashboard() {
       </section>
 
       <section>
-        <h2 className="mb-stack-md font-heading text-headline-lg uppercase tracking-wide text-on-surface">
+        <h2 className="mb-stack-md font-heading text-headline-lg tracking-wide text-on-surface">
           {t("dashboard.recentOrders")}
         </h2>
         {orders.isError ? (

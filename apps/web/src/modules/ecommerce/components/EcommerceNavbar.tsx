@@ -164,14 +164,14 @@ export function EcommerceNavbar() {
             <Link
               to="/ecommerce/cart"
               aria-label={t("nav.cart")}
-              className="inline-flex h-12 w-12 items-center justify-center border-2 border-on-surface bg-surface text-on-surface transition-shadow hover:shadow-pressed"
+              className="inline-flex h-12 w-12 items-center justify-center rounded border border-on-surface bg-surface text-on-surface transition hover:shadow-card"
             >
               <MdOutlineShoppingCart aria-hidden size={20} />
             </Link>
             <Link
               to="/ecommerce/login"
               aria-label={t("nav.account")}
-              className="inline-flex h-12 w-12 items-center justify-center border-2 border-on-surface bg-surface text-on-surface transition-shadow hover:shadow-pressed"
+              className="inline-flex h-12 w-12 items-center justify-center rounded border border-on-surface bg-surface text-on-surface transition hover:shadow-card"
             >
               <MdOutlinePerson aria-hidden size={20} />
             </Link>
@@ -190,7 +190,7 @@ export function EcommerceNavbar() {
             aria-controls={searchPanelId}
             aria-expanded={searchOpen}
             aria-label={searchOpen ? t("nav.closeSearch") : t("nav.openSearch")}
-            className="inline-flex h-12 w-12 items-center justify-center border-2 border-on-surface bg-surface text-on-surface transition-shadow hover:shadow-pressed"
+            className="inline-flex h-12 w-12 items-center justify-center rounded border border-on-surface bg-surface text-on-surface transition hover:shadow-card"
           >
             {searchOpen ? (
               <MdClose aria-hidden size={22} />
@@ -205,7 +205,7 @@ export function EcommerceNavbar() {
             aria-controls={menuPanelId}
             aria-expanded={menuOpen}
             aria-label={menuOpen ? t("nav.closeMenu") : t("nav.openMenu")}
-            className="inline-flex h-12 w-12 items-center justify-center border-2 border-on-surface bg-surface text-on-surface transition-shadow hover:shadow-pressed"
+            className="inline-flex h-12 w-12 items-center justify-center rounded border border-on-surface bg-surface text-on-surface transition hover:shadow-card"
           >
             {menuOpen ? (
               <MdClose aria-hidden size={22} />
@@ -243,12 +243,12 @@ export function EcommerceNavbar() {
               value={query}
               onChange={e => setQuery(e.target.value)}
               placeholder={t("search.placeholder")}
-              className="h-12 flex-1 border-2 border-on-surface bg-surface px-stack-md font-body text-body-md text-on-surface placeholder:text-on-surface-variant focus:shadow-pressed focus:outline-none"
+              className="h-12 flex-1 rounded border border-on-surface bg-surface px-stack-md font-body text-body-md text-on-surface placeholder:text-on-surface-variant focus:shadow-pressed focus:outline-none"
             />
             <button
               type="submit"
               aria-label={t("search.submit")}
-              className="inline-flex h-12 w-12 shrink-0 items-center justify-center border-2 border-on-surface bg-primary text-on-primary transition-shadow hover:shadow-pressed"
+              className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded border border-on-surface bg-primary text-on-primary transition hover:shadow-card"
             >
               <MdSearch aria-hidden size={22} />
             </button>
@@ -337,10 +337,10 @@ function CompactCategoryList({ onNavigate }: { onNavigate: () => void }) {
                   to={`/ecommerce/${slug}`}
                   onClick={onNavigate}
                   className={({ isActive }) =>
-                    `flex min-h-12 items-center gap-stack-sm border-2 px-stack-md transition ${
+                    `flex min-h-12 items-center gap-stack-sm rounded border px-stack-md transition ${
                       isActive
                         ? "border-on-surface bg-primary text-on-primary"
-                        : "border-outline-variant bg-surface text-on-surface hover:border-on-surface hover:shadow-pressed"
+                        : "border-outline-variant bg-surface text-on-surface hover:border-on-surface hover:shadow-card"
                     }`
                   }
                 >

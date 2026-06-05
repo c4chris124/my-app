@@ -40,7 +40,7 @@ export function EcommerceFooter() {
 
           {FOOTER_COLUMNS.map((col) => (
             <div key={col.titleKey}>
-              <h3 className="font-heading text-headline-md uppercase tracking-wide">
+              <h3 className="font-heading text-headline-md tracking-wide">
                 {t(col.titleKey)}
               </h3>
               <ul className="mt-stack-md space-y-stack-sm">

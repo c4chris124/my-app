@@ -11,9 +11,9 @@ export function ProductCard({ product }: { product: Product }) {
   const soldOut = product.stock === "out";
 
   return (
-    <article className="flex flex-col border-2 border-outline-variant bg-surface text-on-surface transition hover:border-on-surface hover:shadow-panel">
-      {/* Image placeholder — sharp industrial panel with the stock chip. */}
-      <div className="relative aspect-[4/3] border-b-2 border-outline-variant bg-surface-container">
+    <article className="flex flex-col overflow-hidden rounded-lg border border-outline-variant bg-surface text-on-surface shadow-card transition hover:-translate-y-0.5 hover:shadow-panel">
+      {/* Image placeholder — soft panel with the stock chip. */}
+      <div className="relative aspect-[4/3] border-b border-outline-variant bg-surface-container">
         <span
           aria-hidden
           className="absolute inset-0 flex items-center justify-center font-display text-display-lg text-outline-variant"
@@ -26,7 +26,7 @@ export function ProductCard({ product }: { product: Product }) {
       </div>
 
       <div className="flex flex-1 flex-col gap-stack-sm p-stack-md">
-        <h3 className="font-heading text-headline-md uppercase tracking-wide">
+        <h3 className="font-heading text-headline-md tracking-wide">
           <Link
             to={`/ecommerce/${product.category}/${product.id}`}
             className="hover:text-secondary"

@@ -81,7 +81,7 @@ export function CrmTopbar({ title }: { title: string }) {
   return (
     <header ref={headerRef} className="border-b-2 border-on-surface bg-surface">
       <div className="flex flex-wrap items-center justify-between gap-stack-md px-margin-mobile py-stack-md lg:px-stack-xl">
-        <h1 className="font-display text-headline-lg uppercase text-on-surface">
+        <h1 className="font-display text-headline-lg text-on-surface">
           {title}
         </h1>
 
@@ -101,7 +101,7 @@ export function CrmTopbar({ title }: { title: string }) {
           <button
             type="button"
             onClick={handleLogout}
-            className="inline-flex h-12 items-center gap-stack-sm border-2 border-on-surface bg-surface-container px-stack-md font-heading text-headline-md uppercase tracking-wide text-on-surface transition-shadow hover:shadow-pressed"
+            className="inline-flex h-12 items-center gap-stack-sm rounded border border-on-surface bg-surface-container px-stack-md font-body text-body-md font-bold tracking-wide text-on-surface transition hover:shadow-card"
           >
             <MdLogout aria-hidden size={20} className="text-accent" />
             <span>{t("actions.logout")}</span>
@@ -117,7 +117,7 @@ export function CrmTopbar({ title }: { title: string }) {
           aria-controls={menuPanelId}
           aria-expanded={menuOpen}
           aria-label={menuOpen ? t("nav.closeMenu") : t("nav.openMenu")}
-          className="inline-flex h-12 w-12 items-center justify-center border-2 border-on-surface bg-surface-container text-on-surface transition-shadow hover:shadow-pressed lg:hidden"
+          className="inline-flex h-12 w-12 items-center justify-center rounded border border-on-surface bg-surface-container text-on-surface transition hover:shadow-card lg:hidden"
         >
           {menuOpen ? (
             <MdClose aria-hidden size={22} />
@@ -162,7 +162,7 @@ export function CrmTopbar({ title }: { title: string }) {
                   to={to}
                   onClick={closeMenu}
                   className={({ isActive }) =>
-                    `flex min-h-12 items-center gap-stack-sm border-2 px-stack-md font-body text-label-bold uppercase tracking-wide transition ${
+                    `flex min-h-12 items-center gap-stack-sm rounded border px-stack-md font-body text-label-bold uppercase tracking-wide transition ${
                       isActive
                         ? "border-on-surface bg-primary text-on-primary"
                         : "border-transparent text-on-surface-variant hover:border-outline-variant hover:text-on-surface"
@@ -185,7 +185,7 @@ export function CrmTopbar({ title }: { title: string }) {
             <button
               type="button"
               onClick={handleLogout}
-              className="inline-flex min-h-12 items-center justify-center gap-stack-sm border-2 border-on-surface bg-surface-container px-stack-md font-heading text-headline-md uppercase tracking-wide text-on-surface transition-shadow hover:shadow-pressed"
+              className="inline-flex min-h-12 items-center justify-center gap-stack-sm rounded border border-on-surface bg-surface-container px-stack-md font-body text-body-md font-bold tracking-wide text-on-surface transition hover:shadow-card"
             >
               <MdLogout aria-hidden size={20} className="text-accent" />
               <span>{t("actions.logout")}</span>

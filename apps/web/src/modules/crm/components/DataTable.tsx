@@ -6,7 +6,7 @@ import {
 } from "@tanstack/react-table";
 
 /**
- * Generic, sharp-edged data table built on TanStack Table. Pass typed column
+ * Generic, soft-edged data table built on TanStack Table. Pass typed column
  * defs and rows; headers and cells render via flexRender.
  */
 export function DataTable<T>({
@@ -26,7 +26,7 @@ export function DataTable<T>({
   });
 
   return (
-    <div className="overflow-x-auto border-2 border-on-surface bg-surface">
+    <div className="overflow-x-auto rounded-lg border border-outline-variant bg-surface shadow-card">
       <table className="w-full border-collapse text-left">
         <thead className="bg-surface-container">
           {table.getHeaderGroups().map((group) => (
@@ -34,7 +34,7 @@ export function DataTable<T>({
               {group.headers.map((header) => (
                 <th
                   key={header.id}
-                  className="whitespace-nowrap border-b-2 border-on-surface px-stack-md py-stack-sm font-heading text-headline-md uppercase tracking-wide text-on-surface"
+                  className="whitespace-nowrap border-b border-outline-variant px-stack-md py-stack-sm font-body text-label-bold uppercase tracking-wide text-on-surface-variant"
                 >
                   {header.isPlaceholder
                     ? null

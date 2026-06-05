@@ -133,11 +133,11 @@
     @apply bg-background text-on-background font-body text-body-md;
   }
 
-  /* Warehouse-signage headings: condensed, uppercase. */
+  /* Soft headings: Montserrat, sentence case — matches the smooth layout. */
   h1,
   h2,
   h3 {
-    @apply font-heading uppercase;
+    @apply font-body font-bold;
   }
 
   /* Smooth the theme switch. */
