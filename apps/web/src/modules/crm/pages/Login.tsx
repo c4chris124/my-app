@@ -63,7 +63,7 @@ export default function Login() {
       </header>
 
       <main className="flex flex-1 items-center justify-center px-margin-mobile py-stack-xl">
-        <div className="w-full max-w-md border-2 border-on-surface bg-surface p-stack-xl shadow-panel">
+        <div className="w-full max-w-md rounded-lg border border-outline-variant bg-surface p-stack-xl shadow-panel">
           <h1 className="font-display text-display-lg text-on-surface">
             {t("login.title")}
           </h1>
@@ -88,7 +88,7 @@ export default function Login() {
                 type="email"
                 autoComplete="username"
                 {...register("email")}
-                className="mt-stack-xs h-12 w-full border-2 border-outline bg-surface-container px-stack-md font-body text-body-md text-on-surface outline-none focus:border-secondary"
+                className="mt-stack-xs h-12 w-full rounded border border-outline bg-surface-container px-stack-md font-body text-body-md text-on-surface outline-none focus:border-secondary"
               />
               {errors.email && (
                 <p className="mt-stack-xs font-body text-label-sm text-error">
@@ -109,7 +109,7 @@ export default function Login() {
                 type="password"
                 autoComplete="current-password"
                 {...register("password")}
-                className="mt-stack-xs h-12 w-full border-2 border-outline bg-surface-container px-stack-md font-body text-body-md text-on-surface outline-none focus:border-secondary"
+                className="mt-stack-xs h-12 w-full rounded border border-outline bg-surface-container px-stack-md font-body text-body-md text-on-surface outline-none focus:border-secondary"
               />
               {errors.password && (
                 <p className="mt-stack-xs font-body text-label-sm text-error">
@@ -119,7 +119,7 @@ export default function Login() {
             </div>
 
             {status === "error" && (
-              <p className="border-2 border-error bg-error-container/20 px-stack-md py-stack-sm font-body text-label-bold text-error">
+              <p className="rounded border border-error bg-error-container/20 px-stack-md py-stack-sm font-body text-label-bold text-error">
                 {t("login.failed")}
               </p>
             )}

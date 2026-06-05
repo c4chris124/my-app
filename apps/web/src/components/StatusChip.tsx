@@ -14,12 +14,12 @@ const CHIP_STYLES: Record<StockState, string> = {
 };
 
 /**
- * Rectangular status block — green / yellow / red, bold uppercase.
+ * Rounded status pill — green / yellow / red, bold uppercase.
  */
 export function StatusChip({ state }: { state: StockState }) {
   return (
     <span
-      className={`inline-block px-stack-sm py-1 font-body text-label-sm font-bold uppercase tracking-wide ${CHIP_STYLES[state]}`}
+      className={`inline-block rounded-full px-stack-sm py-1 font-body text-label-sm font-bold uppercase tracking-wide ${CHIP_STYLES[state]}`}
     >
       {STOCK_LABEL[state]}
     </span>

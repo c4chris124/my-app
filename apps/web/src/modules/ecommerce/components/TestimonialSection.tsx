@@ -16,12 +16,12 @@ export function TestimonialSection() {
   return (
     <section
       aria-labelledby="customers-heading"
-      className="border-y-2 border-on-surface bg-surface-container py-stack-xl"
+      className="border-y border-outline-variant bg-surface-container py-stack-xl"
     >
       <div className="mx-auto max-w-container px-margin-mobile md:px-margin-desktop">
         <h2
           id="customers-heading"
-          className="font-heading text-headline-lg uppercase tracking-wide text-on-surface"
+          className="font-heading text-headline-lg tracking-wide text-on-surface"
         >
           {t("customers.title")}
         </h2>
@@ -39,14 +39,14 @@ export function TestimonialSection() {
               : testimonials.map((item) => (
                   <figure
                     key={item.id}
-                    className="flex flex-col gap-stack-md border-2 border-outline-variant bg-surface p-stack-lg"
+                    className="flex flex-col gap-stack-md rounded-lg border border-outline-variant bg-surface p-stack-lg shadow-card"
                   >
                     <MdFormatQuote aria-hidden size={32} className="text-accent" />
                     <blockquote className="flex-1 font-body text-body-lg text-on-surface">
                       {item.quote}
                     </blockquote>
                     <figcaption className="border-t border-outline-variant pt-stack-md">
-                      <span className="block font-heading text-headline-md uppercase tracking-wide text-on-surface">
+                      <span className="block font-heading text-headline-md tracking-wide text-on-surface">
                         {item.author}
                       </span>
                       <span className="font-body text-label-sm uppercase tracking-widest text-on-surface-variant">

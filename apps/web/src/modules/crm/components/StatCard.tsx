@@ -15,7 +15,7 @@ export function StatCard({ label, value, icon: Icon, trend }: StatCardProps) {
   const positive = (trend ?? 0) >= 0;
 
   return (
-    <div className="border-2 border-outline-variant bg-surface p-stack-lg">
+    <div className="rounded-lg border border-outline-variant bg-surface p-stack-lg shadow-card">
       <div className="flex items-start justify-between">
         <p className="font-body text-label-sm uppercase tracking-widest text-on-surface-variant">
           {label}

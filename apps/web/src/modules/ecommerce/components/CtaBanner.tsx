@@ -13,13 +13,13 @@ interface CtaBannerProps {
  */
 export function CtaBanner({ title, buttonLabel, to }: CtaBannerProps) {
   return (
-    <section className="bg-secondary p-stack-xl text-center">
+    <section className="rounded-xl bg-secondary p-stack-xl text-center">
       <h2 className="mb-stack-md font-display text-headline-lg text-on-secondary">
         {title}
       </h2>
       <Link
         to={to}
-        className="inline-flex h-12 items-center justify-center bg-surface px-stack-lg font-heading text-headline-md uppercase tracking-wide text-on-surface transition hover:shadow-pressed"
+        className="inline-flex h-12 items-center justify-center rounded bg-surface px-stack-lg font-body text-body-md font-bold tracking-wide text-on-surface shadow-panel transition hover:shadow-card"
       >
         {buttonLabel}
       </Link>

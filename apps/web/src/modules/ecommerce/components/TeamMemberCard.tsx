@@ -22,7 +22,7 @@ export function TeamMemberCard({
 }: TeamMemberCardProps) {
   return (
     <article className="group">
-      <div className="relative mb-stack-md aspect-[4/5] overflow-hidden border-2 border-on-surface bg-surface-high">
+      <div className="relative mb-stack-md aspect-[4/5] overflow-hidden rounded-lg border border-outline-variant bg-surface-high">
         {imageSrc ? (
           <img
             src={imageSrc}
@@ -45,7 +45,7 @@ export function TeamMemberCard({
             <a
               href={`mailto:${email}`}
               aria-label={`Email ${name}`}
-              className="inline-flex h-11 w-11 items-center justify-center border-2 border-secondary bg-surface text-secondary transition hover:bg-secondary hover:text-on-secondary"
+              className="inline-flex h-11 w-11 items-center justify-center rounded border border-secondary bg-surface text-secondary transition hover:bg-secondary hover:text-on-secondary"
             >
               <MdAlternateEmail aria-hidden size={20} />
             </a>
@@ -53,7 +53,7 @@ export function TeamMemberCard({
         )}
       </div>
 
-      <h3 className="font-heading text-headline-md uppercase tracking-wide text-on-surface">
+      <h3 className="font-heading text-headline-md tracking-wide text-on-surface">
         {name}
       </h3>
       <p className="font-body text-label-bold uppercase tracking-widest text-secondary">

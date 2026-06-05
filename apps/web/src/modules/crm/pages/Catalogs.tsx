@@ -129,7 +129,7 @@ export default function Catalogs() {
                 }`}
               >
                 <span
-                  className={`font-heading text-headline-md uppercase tracking-widest lg:tracking-wide ${
+                  className={`font-heading text-headline-md tracking-widest lg:tracking-wide ${
                     active ? "font-bold lg:font-normal" : ""
                   }`}
                 >

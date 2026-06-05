@@ -10,10 +10,10 @@ export function ErrorState({ onRetry }: { onRetry: () => void }) {
   const { t } = useTranslation("common");
 
   return (
-    <div className="flex flex-col items-start gap-stack-md border-2 border-error bg-error-container/20 p-stack-lg">
+    <div className="flex flex-col items-start gap-stack-md rounded-lg border border-error bg-error-container/20 p-stack-lg">
       <div className="flex items-center gap-stack-sm text-error">
         <MdErrorOutline aria-hidden size={24} />
-        <p className="font-heading text-headline-md uppercase tracking-wide">
+        <p className="font-heading text-headline-md tracking-wide">
           {t("state.errorTitle")}
         </p>
       </div>

@@ -2,7 +2,7 @@ import { MdLightMode, MdDarkMode } from "react-icons/md";
 import { useThemeStore } from "../theme/themeStore";
 
 /**
- * Sharp, machined toggle between light and dark themes.
+ * Soft, rounded toggle between light and dark themes.
  * Uses the design tokens directly so it adapts to whichever theme is active.
  */
 export function ThemeToggle() {
@@ -16,7 +16,7 @@ export function ThemeToggle() {
       onClick={toggle}
       aria-pressed={isDark}
       aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
-      className="inline-flex h-12 items-center gap-stack-sm border-2 border-on-surface bg-surface-container px-stack-md font-heading text-headline-md tracking-wide text-on-surface transition-shadow hover:shadow-pressed"
+      className="inline-flex h-12 items-center gap-stack-sm rounded border border-on-surface bg-surface-container px-stack-md font-heading text-headline-md tracking-wide text-on-surface transition hover:shadow-card"
     >
       {isDark ? (
         <MdDarkMode className="text-accent" aria-hidden size={20} />

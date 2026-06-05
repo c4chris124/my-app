@@ -96,8 +96,11 @@ export default {
         },
       },
       fontFamily: {
-        display: ["'Bebas Neue'", "sans-serif"],
-        heading: ["'Bebas Neue'", "sans-serif"],
+        // Soft redesign: headings/display now use the Montserrat sans stack
+        // instead of condensed Bebas Neue, so every existing font-heading /
+        // font-display usage softens automatically.
+        display: ["Montserrat", "system-ui", "sans-serif"],
+        heading: ["Montserrat", "system-ui", "sans-serif"],
         body: ["Montserrat", "system-ui", "sans-serif"],
         accent: ["Syne", "sans-serif"],
         sans: ["Montserrat", "system-ui", "sans-serif"],
@@ -109,9 +112,9 @@ export default {
         ],
         "headline-lg": [
           "32px",
-          { lineHeight: "32px", letterSpacing: "0.02em", fontWeight: "400" },
+          { lineHeight: "36px", letterSpacing: "0.01em", fontWeight: "700" },
         ],
-        "headline-md": ["24px", { lineHeight: "24px", fontWeight: "400" }],
+        "headline-md": ["24px", { lineHeight: "28px", fontWeight: "700" }],
         "body-lg": ["18px", { lineHeight: "28px", fontWeight: "400" }],
         "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }],
         "label-bold": ["14px", { lineHeight: "20px", fontWeight: "700" }],

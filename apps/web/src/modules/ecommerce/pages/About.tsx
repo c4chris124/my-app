@@ -25,7 +25,7 @@ export default function About() {
         <h1 className="mx-auto mt-stack-md max-w-3xl font-display text-display-lg text-on-surface">
           {t("about.hero.title")}
         </h1>
-        <div className="mt-stack-lg overflow-hidden border-2 border-on-surface">
+        <div className="mt-stack-lg overflow-hidden rounded-xl border border-outline-variant shadow-card">
           <img
             src={heroImage}
             alt=""

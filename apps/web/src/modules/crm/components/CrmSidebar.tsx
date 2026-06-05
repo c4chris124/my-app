@@ -25,7 +25,7 @@ export function CrmSidebar() {
             key={to}
             to={to}
             className={({ isActive }) =>
-              `flex shrink-0 items-center gap-stack-sm border-2 px-stack-md py-stack-sm font-body text-label-bold uppercase tracking-wide transition ${
+              `flex shrink-0 items-center gap-stack-sm rounded border px-stack-md py-stack-sm font-body text-label-bold uppercase tracking-wide transition ${
                 isActive
                   ? "border-on-surface bg-primary text-on-primary"
                   : "border-transparent text-on-surface-variant hover:border-outline-variant hover:text-on-surface"
