@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import EcommerceLayout from "./layouts/EcommerceLayout";
 import Home from "./pages/Home";
+import About from "./pages/About";
 import Placeholder from "./pages/Placeholder";
 
 /**
@@ -15,6 +16,7 @@ export default function EcommerceModule() {
     <Routes>
       <Route element={<EcommerceLayout />}>
         <Route index element={<Home />} />
+        <Route path="about" element={<About />} />
         <Route
           path="products"
           element={<Placeholder titleKey="nav.products" />}

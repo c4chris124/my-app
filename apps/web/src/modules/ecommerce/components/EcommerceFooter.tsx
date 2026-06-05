@@ -14,7 +14,7 @@ const FOOTER_COLUMNS = [
   {
     titleKey: "footer.company.title",
     links: [
-      { to: "/ecommerce", labelKey: "footer.company.about" },
+      { to: "/ecommerce/about", labelKey: "footer.company.about" },
       { to: "/ecommerce", labelKey: "footer.company.support" },
       { to: "/ecommerce", labelKey: "footer.company.contact" },
     ],
