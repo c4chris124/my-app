@@ -1916,32 +1916,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mdx-js/react@npm:^3.0.0":
-  version: 3.1.1
-  resolution: "@mdx-js/react@npm:3.1.1"
-  dependencies:
-    "@types/mdx": "npm:^2.0.0"
-  peerDependencies:
-    "@types/react": ">=16"
-    react: ">=16"
-  checksum: 10c0/34ca98bc2a0f969894ea144dc5c8a5294690505458cd24965cd9be854d779c193ad9192bf9143c4c18438fafd1902e100d99067e045c69319288562d497558c6
-  languageName: node
-  linkType: hard
-
-"@mswjs/interceptors@npm:^0.41.3":
-  version: 0.41.9
-  resolution: "@mswjs/interceptors@npm:0.41.9"
-  dependencies:
-    "@open-draft/deferred-promise": "npm:^2.2.0"
-    "@open-draft/logger": "npm:^0.3.0"
-    "@open-draft/until": "npm:^2.0.0"
-    is-node-process: "npm:^1.2.0"
-    outvariant: "npm:^1.4.3"
-    strict-event-emitter: "npm:^0.5.1"
-  checksum: 10c0/2efff40877e07ce29846be76c2683177308a72a3ccfe4c096b496412a279acd92b5b9cdad40ad71c36b149a4a7d9e9b4e7d295893a8ba9661b43334f5784ecd8
-  languageName: node
-  linkType: hard
-
 "@myapp/api@workspace:apps/api":
   version: 0.0.0-use.local
   resolution: "@myapp/api@workspace:apps/api"
@@ -1988,62 +1962,20 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@myapp/web@workspace:apps/web"
   dependencies:
-    "@chromatic-com/storybook": "npm:^5.2.1"
     "@eslint/js": "npm:^10.0.1"
-    "@hookform/resolvers": "npm:^5.4.0"
-    "@myapp/shared": "workspace:*"
-    "@storybook/addon-a11y": "npm:^10.4.2"
-    "@storybook/addon-docs": "npm:^10.4.2"
-    "@storybook/addon-mcp": "npm:^0.6.0"
-    "@storybook/addon-themes": "npm:^10.4.2"
-    "@storybook/addon-vitest": "npm:^10.4.2"
-    "@storybook/react-vite": "npm:^10.4.2"
-    "@tanstack/react-query": "npm:^5.101.0"
-    "@tanstack/react-query-devtools": "npm:^5.101.0"
-    "@tanstack/react-table": "npm:^8.21.3"
-    "@testing-library/dom": "npm:^10.4.1"
-    "@testing-library/jest-dom": "npm:^6.9.1"
-    "@testing-library/react": "npm:^16.3.2"
-    "@testing-library/user-event": "npm:^14.6.1"
-    "@types/node": "npm:^25.9.1"
-    "@types/react": "npm:^19.2.16"
+    "@types/node": "npm:^25.7.0"
+    "@types/react": "npm:^19.2.14"
     "@types/react-dom": "npm:^19.2.3"
-    "@vitejs/plugin-react": "npm:^6.0.2"
-    "@vitest/browser-playwright": "npm:^4.1.8"
-    "@vitest/coverage-v8": "npm:^4.1.8"
-    "@vitest/ui": "npm:^4.1.8"
-    autoprefixer: "npm:^10.5.0"
-    axios: "npm:^1.17.0"
-    clsx: "npm:^2.1.1"
-    date-fns: "npm:^4.4.0"
-    eslint: "npm:^10.4.1"
+    "@vitejs/plugin-react": "npm:^6.0.1"
+    eslint: "npm:^10.3.0"
     eslint-plugin-react-hooks: "npm:^7.1.1"
     eslint-plugin-react-refresh: "npm:^0.5.2"
-    eslint-plugin-storybook: "npm:^10.4.2"
     globals: "npm:^17.6.0"
-    i18next: "npm:^26.3.1"
-    i18next-browser-languagedetector: "npm:^8.2.1"
-    i18next-http-backend: "npm:^4.0.0"
-    jsdom: "npm:^29.1.1"
-    msw: "npm:^2.14.6"
-    playwright: "npm:^1.60.0"
-    postcss: "npm:^8.5.15"
     react: "npm:^19.2.6"
     react-dom: "npm:^19.2.6"
-    react-hook-form: "npm:^7.77.0"
-    react-i18next: "npm:^17.0.8"
-    react-icons: "npm:^5.6.0"
-    react-router-dom: "npm:^7.16.0"
-    reselect: "npm:^5.2.0"
-    storybook: "npm:^10.4.2"
-    storybook-addon-pseudo-states: "npm:^10.4.2"
-    tailwindcss: "npm:^3.4.19"
-    typescript: "npm:^6.0.3"
-    typescript-eslint: "npm:^8.60.1"
+    typescript: "npm:~6.0.3"
+    typescript-eslint: "npm:^8.59.3"
     vite: "npm:^8.0.12"
-    vitest: "npm:^4.1.8"
-    zod: "npm:^4.4.3"
-    zustand: "npm:^5.0.14"
   languageName: unknown
   linkType: soft
 
@@ -2616,22 +2548,6 @@ __metadata:
   version: 0.2.9
   resolution: "@pkgr/core@npm:0.2.9"
   checksum: 10c0/ac8e4e8138b1a7a4ac6282873aef7389c352f1f8b577b4850778f5182e4a39a5241facbe48361fec817f56d02b51691b383010843fb08b34a8e8ea3614688fd5
-  languageName: node
-  linkType: hard
-
-"@polka/url@npm:^1.0.0-next.24":
-  version: 1.0.0-next.29
-  resolution: "@polka/url@npm:1.0.0-next.29"
-  checksum: 10c0/0d58e081844095cb029d3c19a659bfefd09d5d51a2f791bc61eba7ea826f13d6ee204a8a448c2f5a855c17df07b37517373ff916dd05801063c0568ae9937684
-  languageName: node
-  linkType: hard
-
-"@react-icons/all-files@npm:^4.1.0":
-  version: 4.1.0
-  resolution: "@react-icons/all-files@npm:4.1.0"
-  peerDependencies:
-    react: "*"
-  checksum: 10c0/6327623b857ba2a9fdf835f2e7029feec7acdd53dc14163085789518d7e1323deb7db649b660d3bad3991285e8408238ad4d09c37b9a0ba7d2601dd74ac0ae56
   languageName: node
   linkType: hard
 
@@ -8664,35 +8580,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mute-stream@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "mute-stream@npm:3.0.0"
-  checksum: 10c0/12cdb36a101694c7a6b296632e6d93a30b74401873cf7507c88861441a090c71c77a58f213acadad03bc0c8fa186639dec99d68a14497773a8744320c136e701
-  languageName: node
-  linkType: hard
-
 "myapp@workspace:.":
   version: 0.0.0-use.local
   resolution: "myapp@workspace:."
   dependencies:
-    "@react-icons/all-files": "npm:^4.1.0"
     concurrently: "npm:^9.x.x"
     typescript: "npm:^6.x.x"
   languageName: unknown
   linkType: soft
 
-"mz@npm:^2.7.0":
-  version: 2.7.0
-  resolution: "mz@npm:2.7.0"
-  dependencies:
-    any-promise: "npm:^1.0.0"
-    object-assign: "npm:^4.0.1"
-    thenify-all: "npm:^1.0.0"
-  checksum: 10c0/103114e93f87362f0b56ab5b2e7245051ad0276b646e3902c98397d18bb8f4a77f2ea4a2c9d3ad516034ea3a56553b60d3f5f78220001ca4c404bd711bd0af39
-  languageName: node
-  linkType: hard
-
-"nanoid@npm:^3.3.11, nanoid@npm:^3.3.12":
+"nanoid@npm:^3.3.11":
   version: 3.3.12
   resolution: "nanoid@npm:3.3.12"
   bin:

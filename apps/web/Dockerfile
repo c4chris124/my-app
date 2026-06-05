@@ -6,6 +6,7 @@ FROM base AS deps
 COPY .yarnrc.yml yarn.lock ./
 COPY .yarn ./.yarn
 COPY package.json ./
+COPY apps/api/package.json ./apps/api/
 COPY apps/web/package.json ./apps/web/
 COPY packages/shared/package.json ./packages/shared/
 RUN yarn install --immutable
