@@ -81,5 +81,39 @@
     "body": "Esta página está en construcción. Vuelve pronto mientras terminamos de configurarla.",
     "category": "Categoría",
     "product": "Producto"
+  },
+  "about": {
+    "hero": {
+      "eyebrow": "Precisión consolidada",
+      "title": "Impulsando la industria alimentaria"
+    },
+    "mission": {
+      "title": "Nuestra misión",
+      "body": "Brindar soluciones integrales en equipo y maquinaria industrial para los sectores de panadería, pastelería y restaurantes, ofreciendo productos de alta calidad, duraderos y tecnológicamente avanzados, junto con un servicio confiable que impulsa el crecimiento y la eficiencia de nuestros clientes."
+    },
+    "vision": {
+      "title": "Nuestra visión",
+      "body": "Ser el distribuidor nacional líder de equipo para la industria alimentaria, reconocido por nuestra innovación, amplia variedad de productos y compromiso con el éxito y desarrollo de cada negocio que confía en nosotros."
+    },
+    "stats": {
+      "years": "Años de exp.",
+      "projects": "Proyectos",
+      "units": "Unidades vendidas",
+      "support": "Soporte"
+    },
+    "team": {
+      "eyebrow": "Impulsando la innovación",
+      "title": "Nuestro equipo",
+      "subtitle": "Un grupo dinámico de especialistas dedicados a ofrecer rendimiento y precisión en cada cocina industrial.",
+      "roles": {
+        "operations": "Directora de Operaciones",
+        "technical": "Líder Técnico",
+        "logistics": "Gerente de Logística"
+      }
+    },
+    "cta": {
+      "title": "¿Listo para renovar tu cocina?",
+      "button": "Contacta a nuestros especialistas"
+    }
   }
 }
