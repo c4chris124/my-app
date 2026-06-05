@@ -3,31 +3,30 @@
 // All colors are driven by CSS custom properties defined in src/index.css.
 // `<alpha-value>` lets Tailwind opacity modifiers (e.g. bg-primary/20) work,
 // which is why the variables are stored as space-separated RGB channels.
-const withAlpha = (variable) => `rgb(var(${variable}) / <alpha-value>)`;
+const withAlpha = variable => `rgb(var(${variable}) / <alpha-value>)`;
 
 export default {
   darkMode: "class",
   content: [
     "./index.html",
     "./src/**/*.{ts,tsx}",
-    // Include shared package if it ever has components
     "../../packages/shared/src/**/*.{ts,tsx}",
   ],
   theme: {
-    // Industrial brand = strictly sharp. Keep `full` only for iconography.
+    // 1. SOFT & SMOOTH CORNERS: Replacing the zeroed-out industrial system
     borderRadius: {
       none: "0px",
-      sm: "0px",
-      DEFAULT: "0px",
-      md: "0px",
-      lg: "0px",
-      xl: "0px",
-      "2xl": "0px",
-      "3xl": "0px",
+      sm: "4px",
+      DEFAULT: "8px",
+      md: "12px",
+      lg: "16px",
+      xl: "24px",
+      "2xl": "32px",
       full: "9999px",
     },
     extend: {
       colors: {
+        // ... keeping your existing colors intact
         surface: {
           DEFAULT: withAlpha("--surface"),
           dim: withAlpha("--surface-dim"),
@@ -67,7 +66,6 @@ export default {
           DEFAULT: withAlpha("--on-tertiary"),
           container: withAlpha("--on-tertiary-container"),
         },
-        // Brand "Energy Yellow" — CTAs, warnings, machine highlights.
         accent: {
           DEFAULT: withAlpha("--accent"),
           on: withAlpha("--on-accent"),
@@ -91,7 +89,6 @@ export default {
           "on-surface": withAlpha("--inverse-on-surface"),
           primary: withAlpha("--inverse-primary"),
         },
-        // Rectangular status chips: stay vivid in both themes.
         status: {
           available: withAlpha("--status-available"),
           out: withAlpha("--status-out"),
@@ -134,10 +131,12 @@ export default {
       maxWidth: {
         container: "1280px",
       },
+      // 2. MODERN ELEVATION SHADOWS: Drop-in replacement for hard-edged block shadows
       boxShadow: {
-        // "Depressed into a machine panel" — tight, dark, low blur.
-        pressed: "inset 2px 2px 0 0 rgb(17 17 17 / 0.25)",
-        panel: "4px 4px 0 0 rgb(17 17 17 / 0.15)",
+        pressed: "inset 0 2px 4px 0 rgb(17 17 17 / 0.06)",
+        panel:
+          "0 10px 25px -5px rgb(17 17 17 / 0.08), 0 8px 10px -6px rgb(17 17 17 / 0.04)",
+        card: "0 4px 20px 0 rgb(0 0 0 / 0.05)", // Soft clean look for product containers
       },
     },
   },
