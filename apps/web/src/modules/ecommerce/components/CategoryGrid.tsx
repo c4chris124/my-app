@@ -18,7 +18,7 @@ export function CategoryGrid() {
     <section aria-labelledby="categories-heading">
       <h2
         id="categories-heading"
-        className="font-heading text-headline-lg uppercase tracking-wide text-on-surface"
+        className="font-heading text-headline-lg tracking-wide text-on-surface"
       >
         {t("categories.title")}
       </h2>
@@ -39,11 +39,11 @@ export function CategoryGrid() {
                   <Link
                     key={slug}
                     to={`/ecommerce/${slug}`}
-                    className="group flex flex-col gap-stack-md border-2 border-outline-variant bg-surface p-stack-lg text-on-surface transition hover:border-on-surface hover:shadow-panel"
+                    className="group flex flex-col gap-stack-md rounded-lg border border-outline-variant bg-surface p-stack-lg text-on-surface shadow-card transition hover:-translate-y-0.5 hover:shadow-panel"
                   >
                     <Icon aria-hidden size={40} className="text-accent" />
                     <div>
-                      <h3 className="font-heading text-headline-md uppercase tracking-wide">
+                      <h3 className="font-heading text-headline-md tracking-wide">
                         {t(labelKey)}
                       </h3>
                       <p className="mt-stack-xs font-body text-label-sm uppercase tracking-widest text-on-surface-variant">

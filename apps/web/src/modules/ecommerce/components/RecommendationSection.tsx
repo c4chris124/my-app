@@ -17,7 +17,7 @@ export function RecommendationSection() {
       <div className="flex items-baseline justify-between gap-stack-md">
         <h2
           id="recommended-heading"
-          className="font-heading text-headline-lg uppercase tracking-wide text-on-surface"
+          className="font-heading text-headline-lg tracking-wide text-on-surface"
         >
           {t("recommended.title")}
         </h2>

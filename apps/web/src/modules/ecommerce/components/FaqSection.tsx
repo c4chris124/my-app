@@ -16,7 +16,7 @@ export function FaqSection() {
     <section aria-labelledby="faq-heading">
       <h2
         id="faq-heading"
-        className="font-heading text-headline-lg uppercase tracking-wide text-on-surface"
+        className="font-heading text-headline-lg tracking-wide text-on-surface"
       >
         {t("faq.title")}
       </h2>
@@ -32,10 +32,10 @@ export function FaqSection() {
           ))}
         </div>
       ) : (
-        <div className="mt-stack-lg divide-y-2 divide-outline-variant border-2 border-outline-variant bg-surface">
+        <div className="mt-stack-lg divide-y divide-outline-variant overflow-hidden rounded-lg border border-outline-variant bg-surface shadow-card">
           {items.map((item) => (
             <details key={item.id} className="group">
-              <summary className="flex cursor-pointer items-center justify-between gap-stack-md p-stack-lg font-heading text-headline-md uppercase tracking-wide text-on-surface marker:content-none hover:bg-surface-container">
+              <summary className="flex cursor-pointer items-center justify-between gap-stack-md p-stack-lg font-heading text-headline-md tracking-wide text-on-surface marker:content-none hover:bg-surface-container">
                 {t(item.questionKey)}
                 <MdAdd
                   aria-hidden

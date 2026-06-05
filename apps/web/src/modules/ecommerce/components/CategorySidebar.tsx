@@ -16,7 +16,7 @@ export function CategorySidebar() {
 
   return (
     <aside className="lg:w-64 lg:shrink-0">
-      <h2 className="font-heading text-headline-md uppercase tracking-wide text-on-surface">
+      <h2 className="font-heading text-headline-md tracking-wide text-on-surface">
         {t("sidebar.title")}
       </h2>
 
@@ -37,10 +37,10 @@ export function CategorySidebar() {
                     key={slug}
                     to={`/ecommerce/${slug}`}
                     className={({ isActive }) =>
-                      `group flex shrink-0 items-center gap-stack-sm border-2 px-stack-md py-stack-sm transition ${
+                      `group flex shrink-0 items-center gap-stack-sm rounded border px-stack-md py-stack-sm transition ${
                         isActive
                           ? "border-on-surface bg-primary text-on-primary"
-                          : "border-outline-variant bg-surface text-on-surface hover:border-on-surface hover:shadow-pressed"
+                          : "border-outline-variant bg-surface text-on-surface hover:border-on-surface hover:shadow-card"
                       }`
                     }
                   >

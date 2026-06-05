@@ -23,10 +23,10 @@ export function InfoCard({
 }: InfoCardProps) {
   return (
     <article
-      className={`flex flex-col border-2 border-on-surface bg-surface-container p-stack-lg transition-shadow hover:shadow-panel ${className}`}
+      className={`flex flex-col rounded-lg border border-outline-variant bg-surface-container p-stack-lg shadow-card transition-shadow hover:shadow-panel ${className}`}
     >
       <IconBadge icon={icon} tone={tone} className="mb-stack-lg" />
-      <h3 className="mb-stack-md font-heading text-headline-md uppercase tracking-wide text-on-surface">
+      <h3 className="mb-stack-md font-heading text-headline-md tracking-wide text-on-surface">
         {title}
       </h3>
       <p className="font-body text-body-md leading-relaxed text-on-surface-variant">
