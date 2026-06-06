@@ -55,7 +55,11 @@ export class PriceRule {
   @JoinColumn({ name: 'scope_product_id' })
   scopeProduct: Product | null;
 
-  @Column({ type: 'enum', enum: ['PERCENTAGE', 'FIXED_AMOUNT'], default: 'PERCENTAGE' })
+  @Column({
+    type: 'enum',
+    enum: ['PERCENTAGE', 'FIXED_AMOUNT'],
+    default: 'PERCENTAGE',
+  })
   discountType: 'PERCENTAGE' | 'FIXED_AMOUNT';
 
   @Column({ type: 'decimal', precision: 8, scale: 2 })

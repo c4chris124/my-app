@@ -11,7 +11,10 @@ export class SuppliersService {
   ) {}
 
   findAll(): Promise<Supplier[]> {
-    return this.supplierRepo.find({ where: { isActive: true }, order: { name: 'ASC' } });
+    return this.supplierRepo.find({
+      where: { isActive: true },
+      order: { name: 'ASC' },
+    });
   }
 
   findByName(name: string): Promise<Supplier | null> {

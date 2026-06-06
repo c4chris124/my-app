@@ -47,13 +47,16 @@ export class ProductsService {
     if (categoryId) qb.andWhere('p.categoryId = :categoryId', { categoryId });
     if (brandId) qb.andWhere('p.brandId = :brandId', { brandId });
     if (supplierId) qb.andWhere('p.supplierId = :supplierId', { supplierId });
-    if (minPrice !== undefined) qb.andWhere('p.salePrice >= :minPrice', { minPrice });
-    if (maxPrice !== undefined) qb.andWhere('p.salePrice <= :maxPrice', { maxPrice });
+    if (minPrice !== undefined)
+      qb.andWhere('p.salePrice >= :minPrice', { minPrice });
+    if (maxPrice !== undefined)
+      qb.andWhere('p.salePrice <= :maxPrice', { maxPrice });
     if (search) {
       qb.andWhere('p.name ILIKE :search', { search: `%${search}%` });
     }
     if (tag) qb.andWhere(':tag = ANY(p.tags)', { tag });
-    if (isFeatured !== undefined) qb.andWhere('p.isFeatured = :isFeatured', { isFeatured });
+    if (isFeatured !== undefined)
+      qb.andWhere('p.isFeatured = :isFeatured', { isFeatured });
 
     const total = await qb.getCount();
     const products = await qb
@@ -75,7 +78,13 @@ export class ProductsService {
   async findOne(id: string): Promise<ProductResponseDto> {
     const product = await this.productRepo.findOne({
       where: { id },
-      relations: { brand: true, supplier: true, category: true, capacityUnit: true, alternateCodes: true },
+      relations: {
+        brand: true,
+        supplier: true,
+        category: true,
+        capacityUnit: true,
+        alternateCodes: true,
+      },
     });
     if (!product) throw new NotFoundException(`Product ${id} not found`);
     return this.toResponseDto(product);
@@ -84,9 +93,16 @@ export class ProductsService {
   async findBySku(sku: string): Promise<ProductResponseDto> {
     const product = await this.productRepo.findOne({
       where: { sku },
-      relations: { brand: true, supplier: true, category: true, capacityUnit: true, alternateCodes: true },
+      relations: {
+        brand: true,
+        supplier: true,
+        category: true,
+        capacityUnit: true,
+        alternateCodes: true,
+      },
     });
-    if (!product) throw new NotFoundException(`Product with SKU ${sku} not found`);
+    if (!product)
+      throw new NotFoundException(`Product with SKU ${sku} not found`);
     return this.toResponseDto(product);
   }
 
@@ -110,14 +126,17 @@ export class ProductsService {
 
   async update(id: string, dto: UpdateProductDto): Promise<ProductResponseDto> {
     const existing = await this.productRepo.findOneOrFail({ where: { id } });
-    const { alternateCodes, ...rest } = dto;
+    const { alternateCodes, ...rest } = dto as CreateProductDto & Partial<{ alternateCodes: string[] }>;
 
     if (rest.salePrice !== undefined && rest.distributorPrice !== undefined) {
-      (rest as any).revenue = Number(rest.salePrice) - Number(rest.distributorPrice);
+      (rest as any).revenue =
+        Number(rest.salePrice) - Number(rest.distributorPrice);
     } else if (rest.salePrice !== undefined && existing.distributorPrice) {
-      (rest as any).revenue = Number(rest.salePrice) - Number(existing.distributorPrice);
+      (rest as any).revenue =
+        Number(rest.salePrice) - Number(existing.distributorPrice);
     } else if (rest.distributorPrice !== undefined && existing.salePrice) {
-      (rest as any).revenue = Number(existing.salePrice) - Number(rest.distributorPrice);
+      (rest as any).revenue =
+        Number(existing.salePrice) - Number(rest.distributorPrice);
     }
 
     await this.productRepo.update(id, rest);
@@ -147,15 +166,21 @@ export class ProductsService {
       brandCode: product.brandCode,
       name: product.name,
       description: product.description,
-      capacityValue: product.capacityValue ? Number(product.capacityValue) : null,
+      capacityValue: product.capacityValue
+        ? Number(product.capacityValue)
+        : null,
       capacityUnit: product.capacityUnit?.abbreviation ?? null,
       brand: product.brand?.name ?? '',
       supplier: product.supplier?.name ?? '',
       category: product.category?.name ?? '',
-      distributorPrice: product.distributorPrice ? Number(product.distributorPrice) : null,
+      distributorPrice: product.distributorPrice
+        ? Number(product.distributorPrice)
+        : null,
       salePrice: product.salePrice ? Number(product.salePrice) : null,
       revenue: product.revenue ? Number(product.revenue) : null,
-      marginPercent: product.marginPercent ? Number(product.marginPercent) : null,
+      marginPercent: product.marginPercent
+        ? Number(product.marginPercent)
+        : null,
       salesWeighting: product.salesWeighting,
       pricePending: product.pricePending,
       isFeatured: product.isFeatured,
