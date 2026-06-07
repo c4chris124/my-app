@@ -17,15 +17,28 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "migration:run": "../../node_modules/.bin/tsx ../../node_modules/typeorm/cli.js migration:run -d src/database/data-source.ts",
+    "migration:revert": "../../node_modules/.bin/tsx ../../node_modules/typeorm/cli.js migration:revert -d src/database/data-source.ts",
+    "migration:generate": "../../node_modules/.bin/tsx ../../node_modules/typeorm/cli.js migration:generate -d src/database/data-source.ts",
+    "seed": "ts-node -r tsconfig-paths/register -e \"require('./src/seed/run-seed.ts')\""
   },
   "dependencies": {
     "@myapp/shared": "workspace:*",
     "@nestjs/common": "^11.1.19",
+    "@nestjs/config": "^4.0.4",
     "@nestjs/core": "^11.1.19",
     "@nestjs/platform-express": "^11.1.19",
+    "@nestjs/swagger": "^11.4.4",
+    "@nestjs/typeorm": "^11.0.1",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.15.1",
+    "csv-parse": "^6.2.1",
+    "dotenv": "^17.4.2",
+    "pg": "^8.21.0",
     "reflect-metadata": "^0.2.2",
-    "rxjs": "^7.8.2"
+    "rxjs": "^7.8.2",
+    "typeorm": "^1.0.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.5",
@@ -36,6 +49,7 @@
     "@types/express": "^5.0.6",
     "@types/jest": "^30.0.0",
     "@types/node": "^25.7.0",
+    "@types/pg": "^8",
     "@types/supertest": "^7.2.0",
     "eslint": "^10.3.0",
     "eslint-config-prettier": "^10.1.8",
@@ -49,6 +63,7 @@
     "ts-loader": "^9.5.7",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
+    "tsx": "^4.22.4",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.59.3"
   },
@@ -62,6 +77,10 @@
     "testRegex": ".*\\.spec\\.ts$",
     "transform": {
       "^.+\\.(t|j)s$": "ts-jest"
+    },
+    "moduleNameMapper": {
+      "^(\\.{1,2}/.*)\\.js$": "$1",
+      "^@myapp/shared$": "<rootDir>/../../packages/shared/src/index.ts"
     },
     "collectCoverageFrom": [
       "**/*.(t|j)s"
