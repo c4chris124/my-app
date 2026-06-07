@@ -12,7 +12,10 @@ import { SeedModule } from './seed/seed.module.js';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ isGlobal: true }),
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath: ['.env', '../../.env'],
+    }),
     DatabaseModule,
     ProductsModule,
     CategoriesModule,
