@@ -3,7 +3,9 @@ import { DataSource } from 'typeorm';
 import * as dotenv from 'dotenv';
 import { join } from 'path';
 
-dotenv.config({ path: join(__dirname, '../../../..', '.env') });
+// When running via ts-node from apps/api/, __dirname = apps/api/src/database
+// .env lives 4 levels up at the monorepo root
+dotenv.config({ path: join(__dirname, '../../../../.env') });
 
 export const AppDataSource = new DataSource({
   type: 'postgres',
@@ -14,6 +16,6 @@ export const AppDataSource = new DataSource({
   password: process.env.POSTGRES_PASSWORD ?? '',
   synchronize: false,
   logging: true,
-  entities: [join(__dirname, '../**/*.entity{.ts,.js}')],
-  migrations: [join(__dirname, '../../migrations/*{.ts,.js}')],
+  entities: [`${join(__dirname, '..')}/**/*.entity{.ts,.js}`],
+  migrations: [`${join(__dirname, '../..')}/migrations/*{.ts,.js}`],
 });

@@ -18,9 +18,9 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "migration:run": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:run -d src/database/data-source.ts",
-    "migration:revert": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:revert -d src/database/data-source.ts",
-    "migration:generate": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:generate -d src/database/data-source.ts",
+    "migration:run": "../../node_modules/.bin/tsx ../../node_modules/typeorm/cli.js migration:run -d src/database/data-source.ts",
+    "migration:revert": "../../node_modules/.bin/tsx ../../node_modules/typeorm/cli.js migration:revert -d src/database/data-source.ts",
+    "migration:generate": "../../node_modules/.bin/tsx ../../node_modules/typeorm/cli.js migration:generate -d src/database/data-source.ts",
     "seed": "ts-node -r tsconfig-paths/register -e \"require('./src/seed/run-seed.ts')\""
   },
   "dependencies": {
@@ -63,6 +63,7 @@
     "ts-loader": "^9.5.7",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
+    "tsx": "^4.22.4",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.59.3"
   },
