@@ -225,7 +225,7 @@ cp .env.example .env
 
 Base URL: `http://localhost:3000` (dev) — all endpoints are prefixed with the resource path shown below.
 
-Interactive Swagger UI is available at `http://localhost:3000/api` when the server is running.
+Interactive Swagger UI is available at `http://localhost:3000/api/docs` when the server is running.
 
 ### Products — `/products`
 
