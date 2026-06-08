@@ -1,6 +1,7 @@
 import 'reflect-metadata';
 import { DataSource } from 'typeorm';
 import * as dotenv from 'dotenv';
+import { SnakeNamingStrategy } from './snake-naming.strategy.js';
 import { join } from 'path';
 
 // When running via ts-node from apps/api/, __dirname = apps/api/src/database
@@ -15,6 +16,7 @@ export const AppDataSource = new DataSource({
   username: process.env.POSTGRES_USER ?? 'appuser',
   password: process.env.POSTGRES_PASSWORD ?? '',
   synchronize: false,
+  namingStrategy: new SnakeNamingStrategy(),
   logging: true,
   entities: [`${join(__dirname, '..')}/**/*.entity{.ts,.js}`],
   migrations: [`${join(__dirname, '../..')}/migrations/*{.ts,.js}`],

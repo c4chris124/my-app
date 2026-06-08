@@ -2,7 +2,9 @@ import { Controller } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { CategoriesService } from './categories.service.js';
 import { ProductsService } from '../products/products.service.js';
+import { Public } from '../auth/decorators/public.decorator.js';
 
+@Public()
 @ApiTags('categories')
 @Controller('categories')
 export class CategoriesController {

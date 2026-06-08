@@ -6,6 +6,7 @@ import Dashboard from "./pages/Dashboard";
 import Orders from "./pages/Orders";
 import Customers from "./pages/Customers";
 import Catalogs from "./pages/Catalogs";
+import Sessions from "./pages/Sessions";
 
 /**
  * CRM module router. Lazy-loaded from the root App so it ships as its own chunk.
@@ -23,6 +24,7 @@ export default function CrmModule() {
           <Route path="orders" element={<Orders />} />
           <Route path="customers" element={<Customers />} />
           <Route path="catalogs" element={<Catalogs />} />
+          <Route path="sessions" element={<Sessions />} />
         </Route>
       </Route>
     </Routes>

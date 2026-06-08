@@ -40,7 +40,9 @@ export function CrmTopbar({ title }: { title: string }) {
 
   const handleLogout = () => {
     closeMenu();
-    logout();
+    // Fire the server-side revocation; redirect immediately (local state is
+    // cleared synchronously enough for the guard to bounce us).
+    void logout();
     navigate("/crm/login", { replace: true });
   };
 

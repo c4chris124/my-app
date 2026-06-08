@@ -26,7 +26,9 @@ import {
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Product } from '../products/entities/product.entity.js';
+import { Public } from '../auth/decorators/public.decorator.js';
 
+@Public()
 @ApiTags('pricing')
 @Controller('pricing')
 export class PricingController {

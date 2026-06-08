@@ -2,7 +2,6 @@ import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import * as fs from 'fs';
-import * as path from 'path';
 import { parse } from 'csv-parse';
 import { Product } from '../products/entities/product.entity.js';
 import { ProductAlternateCode } from '../products/entities/product-alternate-code.entity.js';
