@@ -6,7 +6,8 @@
     "catalogs": "Catálogos",
     "menu": "Menú",
     "openMenu": "Abrir menú",
-    "closeMenu": "Cerrar menú"
+    "closeMenu": "Cerrar menú",
+    "sessions": "Sesiones"
   },
   "actions": {
     "logout": "Cerrar sesión"
@@ -21,7 +22,9 @@
     "failed": "Error de acceso. Revisa tus credenciales e inténtalo de nuevo.",
     "errorEmail": "Introduce un correo electrónico válido.",
     "errorPassword": "La contraseña es obligatoria.",
-    "demoHint": "Modo demo: cualquier correo válido y cualquier contraseña te dará acceso como administrador."
+    "demoHint": "Modo demo: cualquier correo válido y cualquier contraseña te dará acceso como administrador.",
+    "or": "o",
+    "google": "Continuar con Google"
   },
   "dashboard": {
     "metrics": "Métricas clave",
@@ -87,5 +90,18 @@
       "discount": "Descuento",
       "status": "Estado"
     }
+  },
+  "sessions": {
+    "title": "Sesiones activas",
+    "subtitle": "Administra los dispositivos con acceso a tu cuenta",
+    "current": "Este dispositivo",
+    "ip": "IP",
+    "lastSeen": "Última actividad",
+    "signedIn": "Inicio de sesión",
+    "expires": "Expira",
+    "revoke": "Revocar",
+    "signOut": "Cerrar sesión",
+    "revokeOthers": "Cerrar las demás sesiones",
+    "revokingOthers": "Cerrando…"
   }
 }
