@@ -17,6 +17,7 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { BrandsService } from './brands.service.js';
+<<<<<<< HEAD
 import { CreateBrandDto } from './dtos/create-brand.dto.js';
 import { UpdateBrandDto } from './dtos/update-brand.dto.js';
 import { GetBrandDto } from './dtos/get-brand.dto.js';
@@ -25,6 +26,14 @@ import { Public } from '../auth/decorators/public.decorator.js';
 
 @Public()
 @ApiTags('Brands')
+=======
+import { ProductsService } from '../products/products.service.js';
+import { ProductQueryDto } from '../products/dto/product-query.dto.js';
+import { Public } from '../auth/decorators/public.decorator.js';
+
+@Public()
+@ApiTags('brands')
+>>>>>>> 0de7a13 (feat(auth): add user roles and status enums, authentication types, and update shared index)
 @Controller('brands')
 export class BrandsController {
   constructor(private readonly brandsService: BrandsService) {}
