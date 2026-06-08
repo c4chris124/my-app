@@ -38,9 +38,7 @@ export class CategoriesService {
       imageUrl: cat.imageUrl,
       sortOrder: cat.sortOrder,
       productCount: counts[cat.id] ?? 0,
-      children: all
-        .filter((c) => c.parentId === cat.id)
-        .map(toDto),
+      children: all.filter((c) => c.parentId === cat.id).map(toDto),
     });
 
     return all.filter((c) => c.parentId === null).map(toDto);

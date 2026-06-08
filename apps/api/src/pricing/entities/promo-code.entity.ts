@@ -1,4 +1,6 @@
 import {
+  BeforeInsert,
+  BeforeUpdate,
   Column,
   CreateDateColumn,
   Entity,
@@ -9,7 +11,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { DiscountType, PromoApplyScope } from '@myapp/shared';
+import { PromoApplyScope } from '@myapp/shared';
 import { Category } from '../../categories/entities/category.entity.js';
 import { Product } from '../../products/entities/product.entity.js';
 import { PromoCodeRedemption } from './promo-code-redemption.entity.js';
@@ -26,7 +28,10 @@ export class PromoCode {
   @Column({ type: 'varchar', length: 500 })
   description: string;
 
-  @Column({ type: 'enum', enum: ['PERCENTAGE', 'FIXED_AMOUNT', 'FREE_DELIVERY'] })
+  @Column({
+    type: 'enum',
+    enum: ['PERCENTAGE', 'FIXED_AMOUNT', 'FREE_DELIVERY'],
+  })
   discountType: 'PERCENTAGE' | 'FIXED_AMOUNT' | 'FREE_DELIVERY';
 
   @Column({ type: 'decimal', precision: 8, scale: 2, nullable: true })
@@ -84,4 +89,12 @@ export class PromoCode {
 
   @OneToMany(() => PromoCodeRedemption, (r) => r.promoCode)
   redemptions: PromoCodeRedemption[];
+
+  @BeforeInsert()
+  @BeforeUpdate()
+  toUpperCase() {
+    if (this.code) {
+      this.code = this.code.toUpperCase();
+    }
+  }
 }

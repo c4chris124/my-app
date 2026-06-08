@@ -20,6 +20,7 @@ import { PromoCode } from '../../pricing/entities/promo-code.entity.js';
 
 @Entity('products')
 @Index('idx_products_price_range', ['salePrice', 'isActive'])
+@Index('idx_products_fts', ['nameNormalized'])
 export class Product {
   @PrimaryGeneratedColumn('uuid')
   id: string;
@@ -47,7 +48,10 @@ export class Product {
   @Column({ type: 'uuid', nullable: true })
   capacityUnitId: string | null;
 
-  @ManyToOne(() => UnitOfMeasure, (u) => u.products, { nullable: true, eager: false })
+  @ManyToOne(() => UnitOfMeasure, (u) => u.products, {
+    nullable: true,
+    eager: false,
+  })
   @JoinColumn({ name: 'capacity_unit_id' })
   capacityUnit: UnitOfMeasure | null;
 
