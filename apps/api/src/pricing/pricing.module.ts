@@ -8,7 +8,14 @@ import { PromoCodeRedemption } from './entities/promo-code-redemption.entity.js'
 import { Product } from '../products/entities/product.entity.js';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([PriceRule, PromoCode, PromoCodeRedemption, Product])],
+  imports: [
+    TypeOrmModule.forFeature([
+      PriceRule,
+      PromoCode,
+      PromoCodeRedemption,
+      Product,
+    ]),
+  ],
   controllers: [PricingController],
   providers: [PricingService],
   exports: [PricingService],

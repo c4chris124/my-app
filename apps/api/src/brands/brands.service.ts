@@ -11,6 +11,9 @@ export class BrandsService {
   ) {}
 
   findAll(): Promise<Brand[]> {
-    return this.brandRepo.find({ where: { isActive: true }, order: { name: 'ASC' } });
+    return this.brandRepo.find({
+      where: { isActive: true },
+      order: { name: 'ASC' },
+    });
   }
 }

@@ -39,7 +39,9 @@ export class PricingController {
   @Post('calculate')
   @ApiOperation({ summary: 'Calculate final price(s) for cart items' })
   @ApiResponse({ status: 200, type: [PriceBreakdownDto] })
-  async calculate(@Body() dto: CalculatePriceDto): Promise<PriceBreakdownDto[]> {
+  async calculate(
+    @Body() dto: CalculatePriceDto,
+  ): Promise<PriceBreakdownDto[]> {
     const results: PriceBreakdownDto[] = [];
     for (const item of dto.items) {
       const product = await this.productRepo.findOneOrFail({
@@ -60,7 +62,9 @@ export class PricingController {
   @HttpCode(HttpStatus.OK)
   @ApiOperation({ summary: 'Validate a promo code against cart context' })
   @ApiResponse({ status: 200, type: ValidatePromoResponseDto })
-  async validateCode(@Body() dto: ValidatePromoDto): Promise<ValidatePromoResponseDto> {
+  async validateCode(
+    @Body() dto: ValidatePromoDto,
+  ): Promise<ValidatePromoResponseDto> {
     try {
       await this.pricingService.validatePromoCode(dto.code, dto.cartContext);
       return { valid: true };
@@ -108,7 +112,10 @@ export class PricingController {
 
   @Patch('promo-codes/:id')
   @ApiOperation({ summary: 'Update a promo code' })
-  async updatePromoCode(@Param('id') id: string, @Body() dto: UpdatePromoCodeDto) {
+  async updatePromoCode(
+    @Param('id') id: string,
+    @Body() dto: UpdatePromoCodeDto,
+  ) {
     return this.pricingService.updatePromoCode(id, dto as any);
   }
 

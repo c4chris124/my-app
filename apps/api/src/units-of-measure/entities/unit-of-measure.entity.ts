@@ -15,6 +15,9 @@ export class UnitOfMeasure {
   @Column({ type: 'enum', enum: ['weight', 'volume', 'count', 'length'] })
   type: 'weight' | 'volume' | 'count' | 'length';
 
+  @Column({ type: 'boolean', default: true })
+  isActive: boolean;
+
   @OneToMany(() => Product, (p) => p.capacityUnit)
   products: Product[];
 }
