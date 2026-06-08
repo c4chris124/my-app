@@ -6,7 +6,8 @@
     "catalogs": "Catalogs",
     "menu": "Menu",
     "openMenu": "Open menu",
-    "closeMenu": "Close menu"
+    "closeMenu": "Close menu",
+    "sessions": "Sessions"
   },
   "actions": {
     "logout": "Log out"
@@ -21,7 +22,9 @@
     "failed": "Sign-in failed. Check your credentials and try again.",
     "errorEmail": "Enter a valid email address.",
     "errorPassword": "Password is required.",
-    "demoHint": "Demo mode: any valid email and any password will sign you in as an admin."
+    "demoHint": "Demo mode: any valid email and any password will sign you in as an admin.",
+    "or": "or",
+    "google": "Continue with Google"
   },
   "dashboard": {
     "metrics": "Key metrics",
@@ -87,5 +90,18 @@
       "discount": "Discount",
       "status": "Status"
     }
+  },
+  "sessions": {
+    "title": "Active sessions",
+    "subtitle": "Manage the devices signed in to your account",
+    "current": "This device",
+    "ip": "IP",
+    "lastSeen": "Last active",
+    "signedIn": "Signed in",
+    "expires": "Expires",
+    "revoke": "Revoke",
+    "signOut": "Sign out",
+    "revokeOthers": "Sign out other sessions",
+    "revokingOthers": "Signing out…"
   }
 }

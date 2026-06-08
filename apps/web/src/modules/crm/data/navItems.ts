@@ -3,6 +3,7 @@ import {
   MdReceiptLong,
   MdGroup,
   MdInventory2,
+  MdDevices,
 } from "react-icons/md";
 
 /**
@@ -15,4 +16,5 @@ export const CRM_NAV_ITEMS = [
   { to: "/crm/orders", labelKey: "nav.orders", icon: MdReceiptLong },
   { to: "/crm/customers", labelKey: "nav.customers", icon: MdGroup },
   { to: "/crm/catalogs", labelKey: "nav.catalogs", icon: MdInventory2 },
+  { to: "/crm/sessions", labelKey: "nav.sessions", icon: MdDevices },
 ] as const;

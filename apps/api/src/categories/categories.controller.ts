@@ -3,7 +3,9 @@ import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { CategoriesService } from './categories.service.js';
 import { ProductsService } from '../products/products.service.js';
 import { ProductQueryDto } from '../products/dto/product-query.dto.js';
+import { Public } from '../auth/decorators/public.decorator.js';
 
+@Public()
 @ApiTags('categories')
 @Controller('categories')
 export class CategoriesController {
@@ -13,19 +15,26 @@ export class CategoriesController {
   ) {}
 
   @Get()
-  @ApiOperation({ summary: 'Return full category tree with nested subcategories' })
+  @ApiOperation({
+    summary: 'Return full category tree with nested subcategories',
+  })
   findTree() {
     return this.categoriesService.findTree();
   }
 
   @Get(':slug/products')
-  @ApiOperation({ summary: 'Products under a category slug (includes subcategories)' })
+  @ApiOperation({
+    summary: 'Products under a category slug (includes subcategories)',
+  })
   async findProductsBySlug(
     @Param('slug') slug: string,
     @Query() query: ProductQueryDto,
   ) {
     const categoryIds = await this.categoriesService.findProductsBySlug(slug);
     // Use the first (root) category id — for multi-id support the query would need extending
-    return this.productsService.findAll({ ...query, categoryId: categoryIds[0] });
+    return this.productsService.findAll({
+      ...query,
+      categoryId: categoryIds[0],
+    });
   }
 }
