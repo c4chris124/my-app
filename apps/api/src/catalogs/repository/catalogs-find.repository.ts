@@ -24,18 +24,22 @@ export class CatalogsFindRepository {
     const [units, categories, subcategories, prices, promotions] =
       await Promise.all([
         this.unitRepo.count({ where: { isActive: true } }),
-        this.categoryRepo.count({ where: { isActive: true, parentId: IsNull() } }),
-        this.categoryRepo.count({ where: { isActive: true, parentId: Not(IsNull()) } }),
+        this.categoryRepo.count({
+          where: { isActive: true, parentId: IsNull() },
+        }),
+        this.categoryRepo.count({
+          where: { isActive: true, parentId: Not(IsNull()) },
+        }),
         this.priceRuleRepo.count({ where: { isActive: true } }),
         this.promoCodeRepo.count({ where: { isActive: true } }),
       ]);
 
     const data = [
       { id: 'units-of-measure', name: 'Units of Measure', itemCount: units },
-      { id: 'categories',       name: 'Categories',       itemCount: categories },
-      { id: 'subcategories',    name: 'Subcategories',    itemCount: subcategories },
-      { id: 'prices',           name: 'Price Rules',      itemCount: prices },
-      { id: 'promotions',       name: 'Promotions',       itemCount: promotions },
+      { id: 'categories', name: 'Categories', itemCount: categories },
+      { id: 'subcategories', name: 'Subcategories', itemCount: subcategories },
+      { id: 'prices', name: 'Price Rules', itemCount: prices },
+      { id: 'promotions', name: 'Promotions', itemCount: promotions },
     ];
 
     return { data, total: data.length };
