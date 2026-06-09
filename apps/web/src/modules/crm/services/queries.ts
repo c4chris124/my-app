@@ -7,6 +7,7 @@ import {
   fetchCatalogs,
   fetchCustomers,
   fetchDashboardStats,
+  fetchGeneralCatalogs,
   fetchOrders,
 } from "./crmApi";
 import {
@@ -20,6 +21,7 @@ export const crmKeys = {
   orders: ["crm", "orders"] as const,
   customers: ["crm", "customers"] as const,
   catalogs: ["crm", "catalogs"] as const,
+  generalCatalogs: ["catalogs", "general"] as const,
   sessions: ["crm", "sessions"] as const,
 };
 
@@ -37,6 +39,13 @@ export function useCustomers() {
 
 export function useCatalogs() {
   return useQuery({ queryKey: crmKeys.catalogs, queryFn: fetchCatalogs });
+}
+
+export function useGeneralCatalogs() {
+  return useQuery({
+    queryKey: crmKeys.generalCatalogs,
+    queryFn: fetchGeneralCatalogs,
+  });
 }
 
 export function useSessions() {

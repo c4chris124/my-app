@@ -75,7 +75,8 @@
       "categories": "Categorías",
       "subcategories": "Subcategorías",
       "prices": "Precios",
-      "promotions": "Promociones"
+      "promotions": "Promociones",
+      "general": "Catálogos Generales"
     },
     "col": {
       "name": "Nombre",
@@ -88,7 +89,8 @@
       "code": "Código",
       "description": "Descripción",
       "discount": "Descuento",
-      "status": "Estado"
+      "status": "Estado",
+      "itemCount": "Artículos registrados"
     }
   },
   "sessions": {

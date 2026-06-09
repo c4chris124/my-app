@@ -33,17 +33,18 @@ export class UnitsMeasureFindRepository {
     const limit = query.limit ?? 20;
 
     const qb = this.repo
-      .createQueryBuilder()
-      .where('isActive = :isActive', { isActive: true });
+      .createQueryBuilder('UnitOfMeasure')
+      .where('UnitOfMeasure.isActive = :isActive', { isActive: true });
 
     if (query.type) {
-      qb.andWhere('type = :type', { type: query.type });
+      qb.andWhere('UnitOfMeasure.type = :type', { type: query.type });
     }
 
     if (query.search) {
-      qb.andWhere('(name ILIKE :search OR abbreviation ILIKE :search)', {
-        search: `%${query.search}%`,
-      });
+      qb.andWhere(
+        '(UnitOfMeasure.name ILIKE :search OR UnitOfMeasure.abbreviation ILIKE :search)',
+        { search: `%${query.search}%` },
+      );
     }
 
     const [data, total] = await qb

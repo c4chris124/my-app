@@ -15,6 +15,7 @@ import { SuppliersModule } from './suppliers/suppliers.module.js';
 import { PricingModule } from './pricing/pricing.module.js';
 import { SeedModule } from './seed/seed.module.js';
 import { UnitsOfMeasureModule } from './units-of-measure/units-of-measure.module.js';
+import { CatalogsModule } from './catalogs/catalogs.module.js';
 
 @Module({
   imports: [
@@ -35,6 +36,7 @@ import { UnitsOfMeasureModule } from './units-of-measure/units-of-measure.module
     PricingModule,
     SeedModule,
     UnitsOfMeasureModule,
+    CatalogsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
