@@ -9,7 +9,9 @@ import { CatalogsService } from './catalogs.service.js';
 import { CatalogsController } from './catalogs.controller.js';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Category, UnitOfMeasure, PriceRule, PromoCode])],
+  imports: [
+    TypeOrmModule.forFeature([Category, UnitOfMeasure, PriceRule, PromoCode]),
+  ],
   controllers: [CatalogsController],
   providers: [CatalogsFindRepository, CatalogsService],
 })
