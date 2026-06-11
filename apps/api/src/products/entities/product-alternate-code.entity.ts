@@ -10,7 +10,7 @@ import {
 import { Product } from './product.entity.js';
 
 @Entity('product_alternate_codes')
-@Unique(['productId', 'code'])
+@Unique('uq_product_alt_code', ['productId', 'code'])
 export class ProductAlternateCode {
   @PrimaryGeneratedColumn('uuid')
   id: string;
@@ -19,7 +19,7 @@ export class ProductAlternateCode {
   productId: string;
 
   @ManyToOne(() => Product, (p) => p.alternateCodes, { onDelete: 'CASCADE' })
-  @JoinColumn({ name: 'product_id' })
+  @JoinColumn({ name: 'productId' })
   product: Product;
 
   @Index()

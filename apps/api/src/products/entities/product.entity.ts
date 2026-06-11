@@ -20,7 +20,6 @@ import { PromoCode } from '../../pricing/entities/promo-code.entity.js';
 
 @Entity('products')
 @Index('idx_products_price_range', ['salePrice', 'isActive'])
-@Index('idx_products_fts', ['nameNormalized'])
 export class Product {
   @PrimaryGeneratedColumn('uuid')
   id: string;
@@ -36,14 +35,24 @@ export class Product {
   @Column({ type: 'varchar', length: 500 })
   name: string;
 
-  @Column({ type: 'tsvector', nullable: true, select: false })
+  // Full-text search vector kept in sync by the DB (trigger in the migration).
+  // Declared read-only so TypeORM never tries to write it.
+  @Index('idx_products_fts', { synchronize: false })
+  @Column({
+    type: 'tsvector',
+    select: false,
+    insert: false,
+    update: false,
+    nullable: true,
+  })
   nameNormalized: any;
 
   @Column({ type: 'text', nullable: true })
   description: string | null;
 
+  // decimals come back as strings in the pg driver
   @Column({ type: 'decimal', precision: 10, scale: 2, nullable: true })
-  capacityValue: number | null;
+  capacityValue: string | null;
 
   @Column({ type: 'uuid', nullable: true })
   capacityUnitId: string | null;
@@ -52,44 +61,50 @@ export class Product {
     nullable: true,
     eager: false,
   })
-  @JoinColumn({ name: 'capacity_unit_id' })
+  @JoinColumn({ name: 'capacityUnitId' })
   capacityUnit: UnitOfMeasure | null;
 
   @Index('idx_products_brand_id')
   @Column({ type: 'uuid' })
   brandId: string;
 
-  @ManyToOne(() => Brand, (b) => b.products, { eager: false })
-  @JoinColumn({ name: 'brand_id' })
+  @ManyToOne(() => Brand, (b) => b.products, { nullable: false, eager: false })
+  @JoinColumn({ name: 'brandId' })
   brand: Brand;
 
   @Index('idx_products_supplier_id')
   @Column({ type: 'uuid' })
   supplierId: string;
 
-  @ManyToOne(() => Supplier, (s) => s.products, { eager: false })
-  @JoinColumn({ name: 'supplier_id' })
+  @ManyToOne(() => Supplier, (s) => s.products, {
+    nullable: false,
+    eager: false,
+  })
+  @JoinColumn({ name: 'supplierId' })
   supplier: Supplier;
 
   @Index('idx_products_category_id')
   @Column({ type: 'uuid' })
   categoryId: string;
 
-  @ManyToOne(() => Category, (c) => c.products, { eager: false })
-  @JoinColumn({ name: 'category_id' })
+  @ManyToOne(() => Category, (c) => c.products, {
+    nullable: false,
+    eager: false,
+  })
+  @JoinColumn({ name: 'categoryId' })
   category: Category;
 
   @Column({ type: 'decimal', precision: 12, scale: 2, nullable: true })
-  distributorPrice: number | null;
+  distributorPrice: string | null;
 
   @Column({ type: 'decimal', precision: 12, scale: 2, nullable: true })
-  salePrice: number | null;
+  salePrice: string | null;
 
   @Column({ type: 'decimal', precision: 12, scale: 2, nullable: true })
-  revenue: number | null;
+  revenue: string | null;
 
   @Column({ type: 'decimal', precision: 5, scale: 2, nullable: true })
-  marginPercent: number | null;
+  marginPercent: string | null;
 
   @Column({
     type: 'enum',
@@ -122,14 +137,17 @@ export class Product {
   @Column({ type: 'varchar', length: 500, nullable: true })
   metaDescription: string | null;
 
+  @OneToMany(() => ProductAlternateCode, (ac) => ac.product, {
+    cascade: true, // saving a product saves its alt codes in one operation
+    eager: true, // alt codes always loaded with the product
+  })
+  alternateCodes: ProductAlternateCode[];
+
   @CreateDateColumn()
   createdAt: Date;
 
   @UpdateDateColumn()
   updatedAt: Date;
-
-  @OneToMany(() => ProductAlternateCode, (c) => c.product, { cascade: true })
-  alternateCodes: ProductAlternateCode[];
 
   @OneToMany(() => PriceRule, (r) => r.scopeProduct)
   priceRules: PriceRule[];
