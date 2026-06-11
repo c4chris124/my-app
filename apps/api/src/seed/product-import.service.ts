@@ -2,7 +2,6 @@ import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import * as fs from 'fs';
-import * as path from 'path';
 import { parse } from 'csv-parse';
 import { Product } from '../products/entities/product.entity.js';
 import { ProductAlternateCode } from '../products/entities/product-alternate-code.entity.js';
@@ -82,39 +81,56 @@ export class ProductImportService {
 
   private async importRow(row: Record<string, string>): Promise<void> {
     // Strip decorative prefixes from name
-    const rawName = (row['Nombre'] ?? row['name'] ?? '').replace(/✨/g, '').trim();
+    const rawName = (row['Nombre'] ?? row['name'] ?? '')
+      .replace(/✨/g, '')
+      .trim();
     if (!rawName) return;
 
     // Extract brand from name or dedicated column
-    const brandName = this.extractBrand(rawName, row['Marca'] ?? row['brand'] ?? '');
+    const brandName = this.extractBrand(
+      rawName,
+      row['Marca'] ?? row['brand'] ?? '',
+    );
     const brand = await this.findOrCreateBrand(brandName);
 
     // Category
-    const categoryName = row['Categoría'] ?? row['category'] ?? 'Otras Máquinas';
+    const categoryName =
+      row['Categoría'] ?? row['category'] ?? 'Otras Máquinas';
     const category = await this.findOrCreateCategory(categoryName);
 
     // Supplier
     const supplierName = row['Proveedor'] ?? row['supplier'] ?? 'TECNOPAN';
-    const supplier = await this.supplierRepo.findOne({ where: { name: supplierName } });
+    const supplier = await this.supplierRepo.findOne({
+      where: { name: supplierName },
+    });
     if (!supplier) return;
 
     // Prices
-    const distributorPrice = parseGTQPrice(row['Precio Distribuidor'] ?? row['cost'] ?? '');
+    const distributorPrice = parseGTQPrice(
+      row['Precio Distribuidor'] ?? row['cost'] ?? '',
+    );
     const salePrice = parseGTQPrice(row['Precio Venta'] ?? row['price'] ?? '');
     const pricePending = distributorPrice === null && salePrice === null;
 
     // Margin
-    const marginRaw = (row['Margen'] ?? row['margin'] ?? '').replace('%', '').trim();
+    const marginRaw = (row['Margen'] ?? row['margin'] ?? '')
+      .replace('%', '')
+      .trim();
     const marginPercent = marginRaw ? parseFloat(marginRaw) : null;
 
     // Capacity
-    const { value: capacityValue, unit: capacityUnit } = this.extractCapacity(rawName);
+    const { value: capacityValue, unit: capacityUnit } =
+      this.extractCapacity(rawName);
     const unitEntity = capacityUnit
-      ? await this.unitRepo.findOne({ where: { name: capacityUnit.toUpperCase() } })
+      ? await this.unitRepo.findOne({
+          where: { name: capacityUnit.toUpperCase() },
+        })
       : null;
 
     // Sales weighting
-    const weightingRaw = (row['Rotación'] ?? row['weighting'] ?? '').toUpperCase().trim();
+    const weightingRaw = (row['Rotación'] ?? row['weighting'] ?? '')
+      .toUpperCase()
+      .trim();
     const salesWeighting = WEIGHTING_MAP[weightingRaw] ?? null;
 
     // Brand code
@@ -161,9 +177,10 @@ export class ProductImportService {
     return match ? match[1].trim().toUpperCase() : 'UNKNOWN';
   }
 
-  private extractCapacity(
-    name: string,
-  ): { value: number | null; unit: string | null } {
+  private extractCapacity(name: string): {
+    value: number | null;
+    unit: string | null;
+  } {
     const match = CAPACITY_REGEX.exec(name);
     if (!match) return { value: null, unit: null };
     return { value: parseFloat(match[1]), unit: match[2].toUpperCase() };

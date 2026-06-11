@@ -19,7 +19,11 @@ import {
   PaginatedProductResponseDto,
   ProductResponseDto,
 } from './dto/product-response.dto.js';
+import { Public } from '../auth/decorators/public.decorator.js';
 
+// Preserves pre-auth behavior (public storefront catalog). Locking down
+// mutations behind @Roles(ADMIN) is a follow-up product decision.
+@Public()
 @ApiTags('products')
 @Controller('products')
 export class ProductsController {

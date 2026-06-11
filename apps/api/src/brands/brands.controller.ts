@@ -3,7 +3,9 @@ import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { BrandsService } from './brands.service.js';
 import { ProductsService } from '../products/products.service.js';
 import { ProductQueryDto } from '../products/dto/product-query.dto.js';
+import { Public } from '../auth/decorators/public.decorator.js';
 
+@Public()
 @ApiTags('brands')
 @Controller('brands')
 export class BrandsController {
@@ -26,7 +28,14 @@ export class BrandsController {
   ) {
     const brand = await this.brandsService.findAll();
     const found = brand.find((b) => b.slug === slug);
-    if (!found) return { data: [], total: 0, page: 1, limit: query.limit ?? 20, totalPages: 0 };
+    if (!found)
+      return {
+        data: [],
+        total: 0,
+        page: 1,
+        limit: query.limit ?? 20,
+        totalPages: 0,
+      };
     return this.productsService.findAll({ ...query, brandId: found.id });
   }
 }
