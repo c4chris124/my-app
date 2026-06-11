@@ -114,7 +114,10 @@ export class CreateProductDto {
   @IsString({ each: true })
   tags?: string[];
 
-  @ApiPropertyOptional({ example: 'Laminadora de Mesa | REHOBOT', maxLength: 255 })
+  @ApiPropertyOptional({
+    example: 'Laminadora de Mesa | REHOBOT',
+    maxLength: 255,
+  })
   @IsOptional()
   @IsString()
   @MaxLength(255)

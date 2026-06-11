@@ -18,6 +18,6 @@ import { UnitsOfMeasureController } from './units-of-measure.controller.js';
     UnitsMeasureDeleteRepository,
     UnitsOfMeasureService,
   ],
-  exports: [UnitsOfMeasureService],
+  exports: [UnitsOfMeasureService, UnitsMeasureFindRepository],
 })
 export class UnitsOfMeasureModule {}

@@ -24,8 +24,7 @@ export class ProductsService {
   async findAll(
     query: GetProductDto,
   ): Promise<PaginatedResult<ProductResponseDto>> {
-    const paginatedProducts =
-      await this.productsFindRepository.findAll(query);
+    const paginatedProducts = await this.productsFindRepository.findAll(query);
     return {
       ...paginatedProducts,
       data: paginatedProducts.data.map((product) =>
@@ -42,9 +41,7 @@ export class ProductsService {
   async findBySku(productSku: string): Promise<ProductResponseDto> {
     const product = await this.productsFindRepository.findBySku(productSku);
     if (!product) {
-      throw new NotFoundException(
-        `Product with sku '${productSku}' not found`,
-      );
+      throw new NotFoundException(`Product with sku '${productSku}' not found`);
     }
     return ProductResponseDto.fromEntity(product);
   }

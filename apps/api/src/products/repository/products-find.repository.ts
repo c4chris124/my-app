@@ -2,10 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Product } from '../entities/product.entity.js';
-import {
-  GetProductDto,
-  ProductSortColumn,
-} from '../dtos/get-product.dto.js';
+import { GetProductDto, ProductSortColumn } from '../dtos/get-product.dto.js';
 
 export interface PaginatedResult<T> {
   data: T[];

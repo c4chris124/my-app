@@ -18,6 +18,6 @@ import { SuppliersController } from './suppliers.controller.js';
     SuppliersDeleteRepository,
     SuppliersService,
   ],
-  exports: [SuppliersService],
+  exports: [SuppliersService, SuppliersFindRepository],
 })
 export class SuppliersModule {}
