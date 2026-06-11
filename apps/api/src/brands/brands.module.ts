@@ -18,6 +18,6 @@ import { BrandsController } from './brands.controller.js';
     BrandsDeleteRepository,
     BrandsService,
   ],
-  exports: [BrandsService],
+  exports: [BrandsService, BrandsFindRepository],
 })
 export class BrandsModule {}
