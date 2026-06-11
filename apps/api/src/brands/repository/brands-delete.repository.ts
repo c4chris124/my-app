@@ -14,8 +14,7 @@ export class BrandsDeleteRepository {
   ) {}
 
   async deactivate(brandId: string): Promise<DeleteBrandDto> {
-    const brandToDeactivate =
-      await this.brandsFindRepository.findById(brandId);
+    const brandToDeactivate = await this.brandsFindRepository.findById(brandId);
 
     brandToDeactivate.isActive = false;
     await this.brandRepository.save(brandToDeactivate);

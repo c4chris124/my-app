@@ -18,7 +18,10 @@ export class BrandsUpdateRepository {
     private readonly brandsFindRepository: BrandsFindRepository,
   ) {}
 
-  async update(brandId: string, updateBrandDto: UpdateBrandDto): Promise<Brand> {
+  async update(
+    brandId: string,
+    updateBrandDto: UpdateBrandDto,
+  ): Promise<Brand> {
     const newName = updateBrandDto.name;
     const regeneratedSlug = newName ? toSlug(newName) : undefined;
 
