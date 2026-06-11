@@ -18,6 +18,6 @@ import { CategoriesController } from './categories.controller.js';
     CategoriesDeleteRepository,
     CategoriesService,
   ],
-  exports: [CategoriesService],
+  exports: [CategoriesService, CategoriesFindRepository],
 })
 export class CategoriesModule {}

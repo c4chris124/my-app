@@ -149,16 +149,19 @@ export class ProductImportService {
       brandId: brand.id,
       supplierId: supplier.id,
       categoryId: category.id,
-      distributorPrice,
-      salePrice,
+      distributorPrice: distributorPrice?.toFixed(2) ?? null,
+      salePrice: salePrice?.toFixed(2) ?? null,
       revenue:
         salePrice !== null && distributorPrice !== null
-          ? salePrice - distributorPrice
+          ? (salePrice - distributorPrice).toFixed(2)
           : null,
-      marginPercent: isNaN(marginPercent!) ? null : marginPercent,
+      marginPercent:
+        marginPercent !== null && !isNaN(marginPercent)
+          ? marginPercent.toFixed(2)
+          : null,
       salesWeighting,
       pricePending,
-      capacityValue,
+      capacityValue: capacityValue?.toFixed(2) ?? null,
       capacityUnitId: unitEntity?.id ?? null,
     });
 
