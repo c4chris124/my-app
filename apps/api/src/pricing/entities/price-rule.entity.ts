@@ -13,6 +13,8 @@ import { Category } from '../../categories/entities/category.entity.js';
 import { Brand } from '../../brands/entities/brand.entity.js';
 import { Product } from '../../products/entities/product.entity.js';
 
+export type RuleDiscountType = 'PERCENTAGE' | 'FIXED_AMOUNT';
+
 @Entity('price_rules')
 @Index('idx_price_rules_scope_type', ['scope', 'ruleType', 'isActive'])
 export class PriceRule {
@@ -36,7 +38,7 @@ export class PriceRule {
   scopeCategoryId: string | null;
 
   @ManyToOne(() => Category, (c) => c.priceRules, { nullable: true })
-  @JoinColumn({ name: 'scope_category_id' })
+  @JoinColumn({ name: 'scopeCategoryId' })
   scopeCategory: Category | null;
 
   @Index('idx_price_rules_brand')
@@ -44,7 +46,7 @@ export class PriceRule {
   scopeBrandId: string | null;
 
   @ManyToOne(() => Brand, (b) => b.priceRules, { nullable: true })
-  @JoinColumn({ name: 'scope_brand_id' })
+  @JoinColumn({ name: 'scopeBrandId' })
   scopeBrand: Brand | null;
 
   @Index('idx_price_rules_product')
@@ -52,7 +54,7 @@ export class PriceRule {
   scopeProductId: string | null;
 
   @ManyToOne(() => Product, (p) => p.priceRules, { nullable: true })
-  @JoinColumn({ name: 'scope_product_id' })
+  @JoinColumn({ name: 'scopeProductId' })
   scopeProduct: Product | null;
 
   @Column({
@@ -60,22 +62,24 @@ export class PriceRule {
     enum: ['PERCENTAGE', 'FIXED_AMOUNT'],
     default: 'PERCENTAGE',
   })
-  discountType: 'PERCENTAGE' | 'FIXED_AMOUNT';
+  discountType: RuleDiscountType;
 
+  // NOT NULL — every rule has a value.
+  // decimals come back as strings in the pg driver
   @Column({ type: 'decimal', precision: 8, scale: 2 })
-  discountValue: number;
+  discountValue: string;
 
   @Column({ type: 'int', default: 1 })
   minQuantity: number;
 
   @Column({ type: 'decimal', precision: 12, scale: 2, nullable: true })
-  minOrderValue: number | null;
+  minOrderValue: string | null;
 
   @Column({ type: 'int', default: 0 })
-  priority: number;
+  priority: number; // higher evaluated first; resolves ordering
 
   @Column({ type: 'boolean', default: false })
-  isStackable: boolean;
+  isStackable: boolean; // can combine with promo codes / other rules
 
   @Column({ type: 'boolean', default: true })
   isActive: boolean;
