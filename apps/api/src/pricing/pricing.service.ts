@@ -104,7 +104,7 @@ export class PricingService {
 
     if (
       promo.minOrderValue !== null &&
-      cartContext.orderTotal < promo.minOrderValue
+      cartContext.orderTotal < Number(promo.minOrderValue)
     ) {
       throw new PromoCodeInvalidException(
         `Minimum order value of Q${promo.minOrderValue} required`,
