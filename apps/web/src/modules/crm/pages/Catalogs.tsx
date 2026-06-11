@@ -1,7 +1,8 @@
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import type { ColumnDef } from "@tanstack/react-table";
-import { useCatalogs } from "../services/queries";
+import type { CatalogItem } from "@myapp/shared";
+import { useCatalogs, useGeneralCatalogs } from "../services/queries";
 import { DataTable } from "../components/DataTable";
 import { StatusBadge } from "../components/StatusBadge";
 import { Skeleton } from "../../../components/Skeleton";
@@ -13,9 +14,16 @@ import type {
   Promotion,
 } from "../data/types";
 
-type TabKey = "categories" | "subcategories" | "prices" | "promotions";
+// 1. Added "general" to the TabKey
+type TabKey =
+  | "general"
+  | "categories"
+  | "subcategories"
+  | "prices"
+  | "promotions";
 
 const TABS: { key: TabKey; labelKey: string }[] = [
+  { key: "general", labelKey: "catalogs.tabs.general" }, // New General Tab
   { key: "categories", labelKey: "catalogs.tabs.categories" },
   { key: "subcategories", labelKey: "catalogs.tabs.subcategories" },
   { key: "prices", labelKey: "catalogs.tabs.prices" },
@@ -24,8 +32,38 @@ const TABS: { key: TabKey; labelKey: string }[] = [
 
 export default function Catalogs() {
   const { t } = useTranslation("crm");
-  const [tab, setTab] = useState<TabKey>("categories");
-  const { data, isPending, isError, refetch } = useCatalogs();
+  const [tab, setTab] = useState<TabKey>("general"); // Default to the new general tab
+
+  // 2. Call BOTH hooks to get all required data
+  const {
+    data: generalData,
+    isPending: isGeneralPending,
+    isError: isGeneralError,
+    refetch: refetchGeneral,
+  } = useGeneralCatalogs();
+
+  const {
+    data: detailData,
+    isPending: isDetailPending,
+    isError: isDetailError,
+    refetch: refetchDetail,
+  } = useCatalogs();
+
+  // --- Column Definitions ---
+
+  const generalColumns = useMemo<ColumnDef<CatalogItem>[]>(
+    () => [
+      { accessorKey: "name", header: t("catalogs.col.name") },
+      {
+        accessorKey: "itemCount",
+        header: t("catalogs.col.itemCount"),
+        cell: ({ row }) => (
+          <span className="tabular-nums">{row.original.itemCount}</span>
+        ),
+      },
+    ],
+    [t],
+  );
 
   const categoryColumns = useMemo<ColumnDef<CatalogCategory>[]>(
     () => [
@@ -104,14 +142,22 @@ export default function Catalogs() {
     [t],
   );
 
-  if (isError) return <ErrorState onRetry={refetch} />;
+  // 3. Handle combined loading/error states
+  const isError = isGeneralError || isDetailError;
+  const isPending = isGeneralPending || isDetailPending;
+
+  if (isError)
+    return (
+      <ErrorState
+        onRetry={() => {
+          refetchGeneral();
+          refetchDetail();
+        }}
+      />
+    );
 
   return (
     <div className="space-y-stack-lg">
-      {/* Tabs. On mobile (< lg) they become a full-bleed, sticky, horizontally
-          scrollable strip (scrollbar hidden) so the four labels never wrap or
-          cramp; the negative margin cancels <main>'s padding to reach the screen
-          edges. From lg up it reverts to the original static, wrapping bar. */}
       <div className="-mx-margin-mobile sticky top-0 z-30 overflow-x-auto border-b-2 border-outline-variant bg-surface scrollbar-hide lg:static lg:mx-0 lg:overflow-visible lg:bg-transparent">
         <nav className="flex gap-stack-sm px-margin-mobile lg:flex-wrap lg:px-0">
           {TABS.map(({ key, labelKey }) => {
@@ -145,17 +191,30 @@ export default function Catalogs() {
         <Skeleton className="h-80" />
       ) : (
         <>
-          {tab === "categories" && (
-            <DataTable columns={categoryColumns} data={data.categories} />
+          {/* 4. Render the correct table based on the active tab */}
+          {tab === "general" && (
+            <DataTable
+              columns={generalColumns}
+              data={generalData?.data ?? []}
+            />
           )}
-          {tab === "subcategories" && (
-            <DataTable columns={subcategoryColumns} data={data.subcategories} />
+          {tab === "categories" && detailData && (
+            <DataTable columns={categoryColumns} data={detailData.categories} />
           )}
-          {tab === "prices" && (
-            <DataTable columns={priceColumns} data={data.prices} />
+          {tab === "subcategories" && detailData && (
+            <DataTable
+              columns={subcategoryColumns}
+              data={detailData.subcategories}
+            />
           )}
-          {tab === "promotions" && (
-            <DataTable columns={promotionColumns} data={data.promotions} />
+          {tab === "prices" && detailData && (
+            <DataTable columns={priceColumns} data={detailData.prices} />
+          )}
+          {tab === "promotions" && detailData && (
+            <DataTable
+              columns={promotionColumns}
+              data={detailData.promotions}
+            />
           )}
         </>
       )}

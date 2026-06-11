@@ -5,7 +5,12 @@ import { PriceRule } from './entities/price-rule.entity.js';
 import { PromoCode } from './entities/promo-code.entity.js';
 import { Product } from '../products/entities/product.entity.js';
 import { PromoCodeInvalidException } from '../common/exceptions/promo-code-invalid.exception.js';
-import { PriceBreakdown, CartContext, AppliedRule, AppliedPromo } from '@myapp/shared';
+import {
+  PriceBreakdown,
+  CartContext,
+  AppliedRule,
+  AppliedPromo,
+} from '@myapp/shared';
 
 @Injectable()
 export class PricingService {
@@ -16,7 +21,10 @@ export class PricingService {
     private readonly promoRepo: Repository<PromoCode>,
   ) {}
 
-  async getApplicableRules(product: Product, quantity: number): Promise<PriceRule[]> {
+  async getApplicableRules(
+    product: Product,
+    quantity: number,
+  ): Promise<PriceRule[]> {
     const now = new Date();
     const rules = await this.ruleRepo
       .createQueryBuilder('r')
@@ -25,10 +33,10 @@ export class PricingService {
       .andWhere('(r.validUntil IS NULL OR r.validUntil >= :now)', { now })
       .andWhere('r.minQuantity <= :qty', { qty: quantity })
       .andWhere(
-        '(r.scope = \'ALL_PRODUCTS\'' +
-          ' OR (r.scope = \'CATEGORY\' AND r.scopeCategoryId = :catId)' +
-          ' OR (r.scope = \'BRAND\' AND r.scopeBrandId = :brandId)' +
-          ' OR (r.scope = \'PRODUCT\' AND r.scopeProductId = :productId))',
+        "(r.scope = 'ALL_PRODUCTS'" +
+          " OR (r.scope = 'CATEGORY' AND r.scopeCategoryId = :catId)" +
+          " OR (r.scope = 'BRAND' AND r.scopeBrandId = :brandId)" +
+          " OR (r.scope = 'PRODUCT' AND r.scopeProductId = :productId))",
         {
           catId: product.categoryId,
           brandId: product.brandId,
@@ -47,14 +55,18 @@ export class PricingService {
     });
   }
 
-  async validatePromoCode(code: string, cartContext: CartContext): Promise<PromoCode> {
+  async validatePromoCode(
+    code: string,
+    cartContext: CartContext,
+  ): Promise<PromoCode> {
     const upperCode = code.toUpperCase();
     const promo = await this.promoRepo.findOne({
       where: { code: upperCode },
     });
 
     if (!promo) throw new PromoCodeInvalidException('Code not found');
-    if (!promo.isActive) throw new PromoCodeInvalidException('Code is inactive');
+    if (!promo.isActive)
+      throw new PromoCodeInvalidException('Code is inactive');
 
     const now = new Date();
     if (promo.validFrom && promo.validFrom > now) {
@@ -63,13 +75,21 @@ export class PricingService {
     if (promo.validUntil && promo.validUntil < now) {
       throw new PromoCodeInvalidException('Code has expired');
     }
-    if (promo.maxUsesTotal !== null && promo.currentUses >= promo.maxUsesTotal) {
+    if (
+      promo.maxUsesTotal !== null &&
+      promo.currentUses >= promo.maxUsesTotal
+    ) {
       throw new PromoCodeInvalidException('Code usage limit reached');
     }
 
     if (promo.applyScope === 'PRODUCT' && promo.scopeProductId) {
-      const item = cartContext.items.find((i) => i.productId === promo.scopeProductId);
-      if (!item) throw new PromoCodeInvalidException('Code does not apply to items in cart');
+      const item = cartContext.items.find(
+        (i) => i.productId === promo.scopeProductId,
+      );
+      if (!item)
+        throw new PromoCodeInvalidException(
+          'Code does not apply to items in cart',
+        );
       if (item.quantity < promo.minQuantity) {
         throw new PromoCodeInvalidException(
           `Minimum quantity of ${promo.minQuantity} required for this code`,
@@ -82,7 +102,10 @@ export class PricingService {
       // The service caller is responsible for pre-loading product data
     }
 
-    if (promo.minOrderValue !== null && cartContext.orderTotal < promo.minOrderValue) {
+    if (
+      promo.minOrderValue !== null &&
+      cartContext.orderTotal < promo.minOrderValue
+    ) {
       throw new PromoCodeInvalidException(
         `Minimum order value of Q${promo.minOrderValue} required`,
       );
@@ -103,9 +126,10 @@ export class PricingService {
     const rules = await this.getApplicableRules(product, quantity);
 
     // For guests, skip TRADE_TIER rules
-    const eligibleRules = customerType === 'guest'
-      ? rules.filter((r) => r.ruleType !== 'TRADE_TIER')
-      : rules;
+    const eligibleRules =
+      customerType === 'guest'
+        ? rules.filter((r) => r.ruleType !== 'TRADE_TIER')
+        : rules;
 
     // Apply rules: if none are stackable, use only the highest-priority rule
     const stackable = eligibleRules.filter((r) => r.isStackable);
@@ -125,7 +149,7 @@ export class PricingService {
       appliedRules.push({
         ruleId: rule.id,
         name: rule.name,
-        discountType: rule.discountType as 'PERCENTAGE' | 'FIXED_AMOUNT',
+        discountType: rule.discountType,
         discountValue: Number(rule.discountValue),
         amountSaved: saved,
       });
@@ -155,7 +179,8 @@ export class PricingService {
         } else {
           const promoApplies =
             promo.applyScope === 'CART' ||
-            (promo.applyScope === 'PRODUCT' && promo.scopeProductId === product.id);
+            (promo.applyScope === 'PRODUCT' &&
+              promo.scopeProductId === product.id);
 
           if (promoApplies) {
             const saved =
@@ -166,7 +191,7 @@ export class PricingService {
             appliedPromoCode = {
               code: promo.code,
               description: promo.description,
-              discountType: promo.discountType as 'PERCENTAGE' | 'FIXED_AMOUNT',
+              discountType: promo.discountType,
               discountValue: Number(promo.discountValue),
               amountSaved: saved,
             };
@@ -191,7 +216,9 @@ export class PricingService {
   }
 
   async findAllRules(): Promise<PriceRule[]> {
-    return this.ruleRepo.find({ order: { priority: 'DESC', createdAt: 'DESC' } });
+    return this.ruleRepo.find({
+      order: { priority: 'DESC', createdAt: 'DESC' },
+    });
   }
 
   async createRule(data: Partial<PriceRule>): Promise<PriceRule> {
@@ -220,7 +247,10 @@ export class PricingService {
     return this.promoRepo.save(promo);
   }
 
-  async updatePromoCode(id: string, data: Partial<PromoCode>): Promise<PromoCode> {
+  async updatePromoCode(
+    id: string,
+    data: Partial<PromoCode>,
+  ): Promise<PromoCode> {
     if (data.code) {
       (data as any).code = data.code.toUpperCase();
     }

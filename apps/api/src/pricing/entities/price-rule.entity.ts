@@ -8,7 +8,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { PriceRuleType, PriceRuleScope, DiscountType } from '@myapp/shared';
+import { PriceRuleType, PriceRuleScope } from '@myapp/shared';
 import { Category } from '../../categories/entities/category.entity.js';
 import { Brand } from '../../brands/entities/brand.entity.js';
 import { Product } from '../../products/entities/product.entity.js';
