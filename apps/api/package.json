@@ -96,7 +96,7 @@
     },
     "moduleNameMapper": {
       "^(\\.{1,2}/.*)\\.js$": "$1",
-      "^@myapp/shared$": "<rootDir>/../../../packages/shared/src/index.ts"
+      "^@myapp/shared$": "<rootDir>/../../packages/shared/src/index.ts"
     },
     "collectCoverageFrom": [
       "src/**/*.(t|j)s"

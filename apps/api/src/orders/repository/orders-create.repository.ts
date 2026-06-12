@@ -1,9 +1,7 @@
 import {
   BadRequestException,
-  Inject,
   Injectable,
   NotFoundException,
-  Optional,
 } from '@nestjs/common';
 import { DataSource, EntityManager } from 'typeorm';
 import {
@@ -21,17 +19,25 @@ import {
   isOrderNumberUniqueViolation,
   nextOrderNumber,
 } from '../order-number.helpers.js';
-import { PRICING_APPLICATOR } from '../pricing-applicator.js';
-import type { PricingApplicator } from '../pricing-applicator.js';
 import { OrdersFindRepository } from './orders-find.repository.js';
 import { CartsFindRepository } from '../../carts/repository/carts-find.repository.js';
 import { CartsDeleteRepository } from '../../carts/repository/carts-delete.repository.js';
 import { ProductsFindRepository } from '../../products/repository/products-find.repository.js';
 import { UsersService } from '../../users/users.service.js';
+import {
+  EngineLine,
+  PricingEngineService,
+} from '../../pricing/pricing-engine.service.js';
 import { Cart } from '../../carts/entities/cart.entity.js';
 import { User } from '../../users/entities/user.entity.js';
 
-const roundMoney = (amount: number): number => Math.round(amount * 100) / 100;
+const roundMoney = (amount: number): number =>
+  Math.round((amount + Number.EPSILON) * 100) / 100;
+
+interface SnapshotLines {
+  orderItems: OrderItem[];
+  engineLines: EngineLine[]; // index-aligned with orderItems
+}
 
 @Injectable()
 export class OrdersCreateRepository {
@@ -42,10 +48,7 @@ export class OrdersCreateRepository {
     private readonly cartsDeleteRepository: CartsDeleteRepository,
     private readonly productsFindRepository: ProductsFindRepository,
     private readonly usersService: UsersService,
-    // Bound by the upcoming Redemptions module; absent for now.
-    @Optional()
-    @Inject(PRICING_APPLICATOR)
-    private readonly pricingApplicator?: PricingApplicator,
+    private readonly pricingEngineService: PricingEngineService,
   ) {}
 
   async checkout(input: CheckoutDto & { customerId: string }): Promise<Order> {
@@ -74,32 +77,39 @@ export class OrdersCreateRepository {
     }
 
     const savedOrderId = await this.dataSource.transaction(async (manager) => {
-      const orderItems = await this.snapshotCartLines(manager, cart);
-
-      const subtotal = roundMoney(
-        orderItems.reduce((sum, item) => sum + Number(item.lineTotal), 0),
+      const { orderItems, engineLines } = await this.snapshotCartLines(
+        manager,
+        cart,
       );
 
-      // ── REDEMPTIONS / PRICING SEAM ─────────────────────────────────────
-      // When the Redemptions module binds PRICING_APPLICATOR it will, inside
-      // this same transaction: validate input.promoCode, compute per-line
-      // discountAmount + the order discountTotal, set appliedPromoCodeId,
-      // record a redemption row, and increment the promo's currentUses.
-      let discountTotal = 0;
-      let appliedPromoCodeId: string | null = null;
-      if (this.pricingApplicator) {
-        const pricingResult = await this.pricingApplicator.apply({
-          manager,
-          customerId: input.customerId,
-          promoCode: input.promoCode ?? null,
-          items: orderItems,
-          subtotal,
-        });
-        discountTotal = pricingResult.discountTotal;
-        appliedPromoCodeId = pricingResult.appliedPromoCodeId;
-      }
-      // ───────────────────────────────────────────────────────────────────
+      // ── PRICING ENGINE (rules + promo, same math as /pricing/preview) ──
+      // The eligibility guard above guarantees an ACTIVE CUSTOMER, so the
+      // checkout customerType is always 'registered'.
+      const breakdown = await this.pricingEngineService.computeForCheckout(
+        engineLines,
+        'registered',
+        input.customerId,
+        input.promoCode,
+        manager,
+      );
 
+      // A typed promo the engine rejected fails the checkout — never place
+      // the order silently at full price.
+      if (input.promoCode && breakdown.promoRejectedReason) {
+        throw new BadRequestException(
+          `Promo code not applicable: ${breakdown.promoRejectedReason}`,
+        );
+      }
+
+      // Freeze the engine's per-line results onto the snapshots.
+      breakdown.lines.forEach((breakdownLine, index) => {
+        orderItems[index].discountAmount =
+          breakdownLine.discountAmount.toFixed(2);
+        orderItems[index].lineTotal = breakdownLine.lineTotal.toFixed(2);
+      });
+
+      const subtotal = breakdown.subtotal;
+      const discountTotal = breakdown.discountTotal;
       const total = roundMoney(subtotal - discountTotal);
       const totalItems = orderItems.reduce(
         (sum, item) => sum + item.quantity,
@@ -120,7 +130,7 @@ export class OrdersCreateRepository {
         discountTotal: discountTotal.toFixed(2),
         total: total.toFixed(2),
         totalItems,
-        appliedPromoCodeId,
+        appliedPromoCodeId: breakdown.appliedPromo?.id ?? null,
         notes: input.notes ?? null,
         items: orderItems,
         statusHistory: [
@@ -139,6 +149,22 @@ export class OrdersCreateRepository {
 
       // cascade inserts items + history
       const savedOrder = await manager.getRepository(Order).save(newOrder);
+
+      // Promo applied → record the redemption + guarded currentUses
+      // increment, inside this same transaction. A ConflictException here
+      // (global cap hit concurrently) rolls the whole checkout back.
+      if (breakdown.appliedPromo) {
+        await this.pricingEngineService.recordRedemption(
+          {
+            promoCodeId: breakdown.appliedPromo.id,
+            orderId: savedOrder.id,
+            customerId: input.customerId,
+            discountAmount: breakdown.promoDiscountTotal,
+            isFreeDelivery: breakdown.isFreeDelivery,
+          },
+          manager,
+        );
+      }
 
       // same transaction: the cart flips inactive only if the order commits
       await this.cartsDeleteRepository.deactivate(cart.id, manager);
@@ -165,13 +191,17 @@ export class OrdersCreateRepository {
     return customer;
   }
 
-  /** Re-validates each product and freezes its price/name/sku into a line. */
+  /**
+   * Re-validates each product and freezes its price/name/sku into a line,
+   * alongside the index-aligned EngineLine the pricing engine consumes.
+   */
   private async snapshotCartLines(
     manager: EntityManager,
     cart: Cart,
-  ): Promise<OrderItem[]> {
+  ): Promise<SnapshotLines> {
     const orderItemRepository = manager.getRepository(OrderItem);
     const orderItems: OrderItem[] = [];
+    const engineLines: EngineLine[] = [];
 
     for (const cartItem of cart.items) {
       const product = await this.productsFindRepository
@@ -210,8 +240,18 @@ export class OrdersCreateRepository {
           lineTotal: lineTotal.toFixed(2),
         }),
       );
+      engineLines.push({
+        productId: product.id,
+        name: product.name,
+        unitPrice,
+        distributorPrice: Number(product.distributorPrice ?? 0),
+        quantity: cartItem.quantity,
+        categoryId: product.categoryId,
+        brandId: product.brandId,
+        tags: product.tags ?? [],
+      });
     }
 
-    return orderItems;
+    return { orderItems, engineLines };
   }
 }

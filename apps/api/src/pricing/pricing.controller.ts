@@ -11,6 +11,9 @@ import {
 } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { PricingService } from './pricing.service.js';
+import { PricingEngineService } from './pricing-engine.service.js';
+import { PreviewCartDto } from './dtos/preview-cart.dto.js';
+import { PriceBreakdownResponseDto } from './dtos/price-breakdown.dto.js';
 import { CalculatePriceDto } from './dto/calculate-price.dto.js';
 import { ValidatePromoDto } from './dto/validate-promo.dto.js';
 import {
@@ -34,9 +37,24 @@ import { Public } from '../auth/decorators/public.decorator.js';
 export class PricingController {
   constructor(
     private readonly pricingService: PricingService,
+    private readonly pricingEngineService: PricingEngineService,
     @InjectRepository(Product)
     private readonly productRepo: Repository<Product>,
   ) {}
+
+  // Public so the storefront can show a live discounted total. NEVER writes:
+  // no redemption row, no currentUses change. A rejected promo returns 200
+  // with appliedPromo: null + promoRejectedReason, not an error.
+  @Post('preview')
+  @HttpCode(HttpStatus.OK)
+  @ApiOperation({
+    summary:
+      'Preview cart pricing (rules + promo) — same math checkout charges',
+  })
+  @ApiResponse({ status: 200, type: PriceBreakdownResponseDto })
+  preview(@Body() dto: PreviewCartDto): Promise<PriceBreakdownResponseDto> {
+    return this.pricingEngineService.previewCart(dto);
+  }
 
   @Post('calculate')
   @ApiOperation({ summary: 'Calculate final price(s) for cart items' })

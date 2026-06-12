@@ -12,6 +12,7 @@ import { OrdersController } from './orders.controller.js';
 import { CartsModule } from '../carts/carts.module.js';
 import { ProductsModule } from '../products/products.module.js';
 import { UsersModule } from '../users/users.module.js';
+import { PricingModule } from '../pricing/pricing.module.js';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { UsersModule } from '../users/users.module.js';
     CartsModule,
     ProductsModule,
     UsersModule,
+    PricingModule,
   ],
   controllers: [OrdersController],
   providers: [

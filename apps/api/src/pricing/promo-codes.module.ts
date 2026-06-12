@@ -24,6 +24,10 @@ import { CategoriesModule } from '../categories/categories.module.js';
     PromoCodesDeleteRepository,
     PromoCodesService,
   ],
-  exports: [PromoCodesService, PromoCodesFindRepository],
+  exports: [
+    PromoCodesService,
+    PromoCodesFindRepository,
+    PromoCodesUpdateRepository,
+  ],
 })
 export class PromoCodesModule {}
