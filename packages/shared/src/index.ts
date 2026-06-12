@@ -3,3 +3,4 @@ export * from "./types/pricing.types.js";
 export * from "./types/auth.types.js";
 export * from "./types/catalog.types.js";
 export * from "./enums/auth.enums.js";
+export * from "./enums/order.enums.js";

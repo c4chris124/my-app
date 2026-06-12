@@ -14,7 +14,7 @@ import {
 import { PromoApplyScope } from '@myapp/shared';
 import { Category } from '../../categories/entities/category.entity.js';
 import { Product } from '../../products/entities/product.entity.js';
-import { PromoCodeRedemption } from './promo-code-redemption.entity.js';
+import { PromoCodeRedemption } from '../../redemptions/entities/promo-code-redemption.entity.js';
 
 export type PromoDiscountType = 'PERCENTAGE' | 'FIXED_AMOUNT' | 'FREE_DELIVERY';
 

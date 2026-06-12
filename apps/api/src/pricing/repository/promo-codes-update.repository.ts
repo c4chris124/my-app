@@ -5,7 +5,7 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { EntityManager, Repository } from 'typeorm';
 import { PromoCode } from '../entities/promo-code.entity.js';
 import { UpdatePromoCodeDto } from '../dtos/update-promo-code.dto.js';
 import { PromoCodesFindRepository } from './promo-codes-find.repository.js';
@@ -164,6 +164,29 @@ export class PromoCodesUpdateRepository {
     await this.promoCodeRepository.save(promoCodeToUpdate);
 
     return this.promoCodesFindRepository.findById(promoCodeId);
+  }
+
+  /**
+   * Race-safe global-cap increment for checkout. The WHERE clause makes the
+   * cap check atomic: when the limit was hit concurrently, 0 rows are
+   * affected and the caller must roll back. Accepts checkout's
+   * EntityManager so the increment commits with the order + redemption.
+   */
+  async incrementUses(
+    promoCodeId: string,
+    manager?: EntityManager,
+  ): Promise<number> {
+    const repository = manager
+      ? manager.getRepository(PromoCode)
+      : this.promoCodeRepository;
+    const result = await repository
+      .createQueryBuilder()
+      .update(PromoCode)
+      .set({ currentUses: () => 'current_uses + 1' })
+      .where('id = :promoCodeId', { promoCodeId })
+      .andWhere('(max_uses_total IS NULL OR current_uses < max_uses_total)')
+      .execute();
+    return result.affected ?? 0;
   }
 
   private async ensureReferenceExists(
