@@ -7,7 +7,7 @@
     "packages/*"
   ],
   "scripts": {
-    "dev:api": "yarn workspace @myapp/api start:dev",
+    "dev:api": "yarn workspace @myapp/shared build && yarn workspace @myapp/api start:dev",
     "dev:web": "yarn workspace @myapp/web dev",
     "dev:all": "concurrently \"yarn dev:api\" \"yarn dev:web\"",
     "build:all": "yarn workspaces foreach --topological-dev run build",

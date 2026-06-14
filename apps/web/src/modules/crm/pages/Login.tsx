@@ -3,10 +3,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { FcGoogle } from "react-icons/fc";
 import { Button } from "../../../components/Button";
 import { LanguageToggle } from "../../../components/LanguageToggle";
 import { ThemeToggle } from "../../../components/ThemeToggle";
 import { CRM_ROLES, useAuthStore } from "../../../services/authStore";
+
+/** API origin for top-level OAuth navigation (same `/api` proxy as axios). */
+const apiBase = import.meta.env.VITE_API_URL ?? "/api";
 
 const schema = z.object({
   email: z.string().email(),
@@ -133,6 +137,24 @@ export default function Login() {
               {status === "loading" ? t("login.submitting") : t("login.submit")}
             </Button>
           </form>
+
+          <div className="mt-stack-lg flex items-center gap-stack-sm">
+            <span className="h-px flex-1 bg-outline-variant" />
+            <span className="font-body text-label-sm uppercase tracking-wide text-on-surface-variant">
+              {t("login.or")}
+            </span>
+            <span className="h-px flex-1 bg-outline-variant" />
+          </div>
+
+          {/* Top-level navigation (not XHR) so the OAuth redirect works; the
+              API resolves `state` as the post-login returnTo. */}
+          <a
+            href={`${apiBase}/auth/google?state=${encodeURIComponent(redirectTo)}`}
+            className="mt-stack-md flex h-12 w-full items-center justify-center gap-stack-sm rounded border-2 border-outline bg-surface font-body text-body-md font-bold tracking-wide text-on-surface transition-colors hover:bg-surface-container"
+          >
+            <FcGoogle className="text-headline-md" aria-hidden />
+            {t("login.google")}
+          </a>
 
           <p className="mt-stack-lg border-t border-outline-variant pt-stack-md font-body text-label-sm text-on-surface-variant">
             {t("login.demoHint")}

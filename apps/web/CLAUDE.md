@@ -67,13 +67,21 @@ The single `QueryClient` (`src/services/queryClient.ts`) has `staleTime: 60s` an
 
 ### Auth
 
-`src/services/authStore.ts` is a Zustand store with `persist` middleware (localStorage
-key `rehobot-auth`). It persists only `{ user, token }`, re-applies the bearer token to
-axios via `onRehydrateStorage`, and `login(credentials, domain)` tags the request with
-the originating storefront. Roles: `customer | admin | manager`; `CRM_ROLES =
-["admin", "manager"]`. The CRM gates protected routes with
-`modules/crm/guards/RequireCrmAuth.tsx` (redirects to `/crm/login`, preserving
-`location.state.from`). Ecommerce auth-guarded routes are planned but not yet built.
+**Cookie-session auth** (no bearer token, nothing auth-related in localStorage). The
+session is an HttpOnly cookie set by the API; `apiClient` sends it via
+`withCredentials: true` and mirrors the readable `csrf` cookie into the `X-CSRF-Token`
+header on mutating verbs (double-submit). Types (`AuthUser`, `LoginResponse`,
+`SessionInfo`, …) come from `@myapp/shared`.
+
+`src/services/authStore.ts` is a plain (non-persisted) Zustand store holding only the
+public `user` projection plus `status`/`initialized`. On startup `App.tsx` calls
+`bootstrap()` → `GET /auth/me` to rehydrate from the cookie; `RequireCrmAuth` shows a
+spinner until `initialized` so an authenticated user isn't bounced to `/crm/login`.
+`login(credentials, domain)` posts `{ email, password }` and, for `domain === "crm"`,
+rejects non-staff roles. `logout()` calls `POST /auth/logout`. Roles: `customer | admin
+| manager`; `CRM_ROLES = ["admin", "manager"]`. Device management lives at
+`/crm/sessions` (`pages/Sessions.tsx`) — list/revoke/revoke-others. The CRM login page
+also offers Google OAuth via a top-level link to `/api/auth/google`.
 
 ### Mocking (MSW)
 

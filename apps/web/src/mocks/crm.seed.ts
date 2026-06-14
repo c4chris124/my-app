@@ -1,5 +1,6 @@
 // Seed data the MSW handlers serve for the CRM module.
 
+import type { CatalogListResponse } from "@myapp/shared";
 import type {
   CrmCatalogs,
   Customer,
@@ -36,6 +37,16 @@ export const CUSTOMERS: Customer[] = [
   { id: "CUS-005", name: "Aisha Karim", company: "Bistró Lumen", email: "aisha@bistrolumen.com", orders: 7, lifetimeValue: 22500, currency: "EUR", status: "active" },
   { id: "CUS-006", name: "Pablo Ortega", company: "Catering del Sur", email: "p.ortega@cateringsur.es", orders: 1, lifetimeValue: 5100, currency: "EUR", status: "inactive" },
 ];
+
+export const GENERAL_CATALOGS: CatalogListResponse = {
+  data: [
+    { id: "cat-cooking", name: "Cooking", itemCount: 48 },
+    { id: "cat-food-prep", name: "Food Prep", itemCount: 27 },
+    { id: "cat-refrigeration", name: "Refrigeration", itemCount: 32 },
+    { id: "cat-warewashing", name: "Warewashing", itemCount: 19 },
+  ],
+  total: 4,
+};
 
 export const CATALOGS: CrmCatalogs = {
   categories: [

@@ -66,6 +66,3 @@ docker-compose.override.yml
 # ── Misc ──────────────────────────────────────────────────────
 *.pem
 .turbo/
-
-
-CLAUDE.md

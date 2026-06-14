@@ -1,15 +1,11 @@
 import { create } from "zustand";
-import { persist } from "zustand/middleware";
-import { apiClient, setAuthToken } from "./apiClient";
+import { UserRole, CRM_ROLES } from "@myapp/shared";
+import type { AuthUser, LoginResponse, MeResponse } from "@myapp/shared";
+import { apiClient } from "./apiClient";
 
-export type UserRole = "customer" | "admin" | "manager";
-
-export interface AuthUser {
-  id: string;
-  name: string;
-  email: string;
-  role: UserRole;
-}
+// Re-exported so existing consumers keep importing auth types/roles from here.
+export { UserRole, CRM_ROLES };
+export type { AuthUser };
 
 /** Which storefront the login originated from — determines the expected role. */
 export type AuthDomain = "ecommerce" | "crm";
@@ -19,67 +15,74 @@ export interface Credentials {
   password: string;
 }
 
-interface LoginResponse {
-  token: string;
-  user: AuthUser;
-}
-
 interface AuthState {
   user: AuthUser | null;
-  token: string | null;
   status: "idle" | "loading" | "error";
   error: string | null;
+  /** False until the initial `GET /auth/me` bootstrap has resolved. */
+  initialized: boolean;
   login: (credentials: Credentials, domain: AuthDomain) => Promise<void>;
-  logout: () => void;
+  logout: () => Promise<void>;
+  bootstrap: () => Promise<void>;
 }
 
-const STORAGE_KEY = "rehobot-auth";
+/** Roles permitted into the CRM storefront. */
+function isCrmRole(role: UserRole): boolean {
+  return CRM_ROLES.includes(role);
+}
 
-export const useAuthStore = create<AuthState>()(
-  persist(
-    (set) => ({
-      user: null,
-      token: null,
-      status: "idle",
-      error: null,
+/**
+ * Cookie-session auth store. The session lives in an HttpOnly cookie the JS
+ * never sees; this store only mirrors the *public* user projection for the UI.
+ * It is intentionally NOT persisted — the cookie is the single source of truth,
+ * and `bootstrap()` rehydrates `user` from `GET /auth/me` on app start.
+ */
+export const useAuthStore = create<AuthState>()((set) => ({
+  user: null,
+  status: "idle",
+  error: null,
+  initialized: false,
 
-      login: async (credentials, domain) => {
-        set({ status: "loading", error: null });
-        try {
-          const { data } = await apiClient.post<LoginResponse>("/auth/login", {
-            ...credentials,
-            domain,
-          });
-          setAuthToken(data.token);
-          set({ user: data.user, token: data.token, status: "idle" });
-        } catch {
-          set({
-            status: "error",
-            error: "invalidCredentials",
-            user: null,
-            token: null,
-          });
-          setAuthToken(null);
-          throw new Error("invalidCredentials");
-        }
-      },
+  login: async (credentials, domain) => {
+    set({ status: "loading", error: null });
+    try {
+      const { data } = await apiClient.post<LoginResponse>(
+        "/auth/login",
+        credentials,
+      );
+      // CRM sign-in must resolve to a staff role; otherwise reject + sign out.
+      if (domain === "crm" && !isCrmRole(data.user.role)) {
+        await apiClient.post("/auth/logout").catch(() => {});
+        set({ status: "error", error: "notAuthorized", user: null });
+        throw new Error("notAuthorized");
+      }
+      set({ user: data.user, status: "idle", error: null });
+    } catch (err) {
+      // Preserve a specific error already set above; otherwise generic.
+      set((s) => ({
+        status: "error",
+        error: s.error ?? "invalidCredentials",
+        user: null,
+      }));
+      throw err instanceof Error ? err : new Error("invalidCredentials");
+    }
+  },
 
-      logout: () => {
-        setAuthToken(null);
-        set({ user: null, token: null, status: "idle", error: null });
-      },
-    }),
-    {
-      name: STORAGE_KEY,
-      // Only persist the session itself, not transient request status.
-      partialize: (state) => ({ user: state.user, token: state.token }),
-      // Re-apply the bearer token to axios when a session is restored.
-      onRehydrateStorage: () => (state) => {
-        if (state?.token) setAuthToken(state.token);
-      },
-    },
-  ),
-);
+  logout: async () => {
+    try {
+      await apiClient.post("/auth/logout");
+    } catch {
+      // Best-effort — clear local state regardless of the network result.
+    }
+    set({ user: null, status: "idle", error: null });
+  },
 
-/** True when a user with a CRM-capable role is signed in. */
-export const CRM_ROLES: UserRole[] = ["admin", "manager"];
+  bootstrap: async () => {
+    try {
+      const { data } = await apiClient.get<MeResponse>("/auth/me");
+      set({ user: data.user, initialized: true });
+    } catch {
+      set({ user: null, initialized: true });
+    }
+  },
+}));

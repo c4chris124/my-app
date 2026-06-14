@@ -3,6 +3,7 @@ import {
   CATALOGS,
   CUSTOMERS,
   DASHBOARD_STATS,
+  GENERAL_CATALOGS,
   ORDERS,
 } from "./crm.seed";
 
@@ -25,5 +26,10 @@ export const crmHandlers = [
   http.get("/api/crm/catalogs", async () => {
     await delay(300);
     return HttpResponse.json(CATALOGS);
+  }),
+
+  http.get("/api/catalogs", async () => {
+    await delay(300);
+    return HttpResponse.json(GENERAL_CATALOGS);
   }),
 ];
