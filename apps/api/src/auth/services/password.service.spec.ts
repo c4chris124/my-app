@@ -16,9 +16,9 @@ describe('PasswordService', () => {
     const svc = new PasswordService(makeConfig());
     const hash = await svc.hash('correct horse battery staple');
     expect(hash).toMatch(/^\$argon2id\$/);
-    await expect(svc.verify(hash, 'correct horse battery staple')).resolves.toBe(
-      true,
-    );
+    await expect(
+      svc.verify(hash, 'correct horse battery staple'),
+    ).resolves.toBe(true);
   });
 
   it('rejects an incorrect password', async () => {

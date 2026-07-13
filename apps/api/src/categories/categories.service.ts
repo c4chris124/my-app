@@ -1,68 +1,66 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { IsNull, Repository } from 'typeorm';
 import { Category } from './entities/category.entity.js';
-import { CategoryTreeDto } from '@myapp/shared';
+import {
+  CategoriesFindRepository,
+  CategoryTreeNode,
+  PaginatedResult,
+} from './repository/categories-find.repository.js';
+import { CategoriesCreateRepository } from './repository/categories-create.repository.js';
+import { CategoriesUpdateRepository } from './repository/categories-update.repository.js';
+import { CategoriesDeleteRepository } from './repository/categories-delete.repository.js';
+import { CreateCategoryDto } from './dtos/create-category.dto.js';
+import { UpdateCategoryDto } from './dtos/update-category.dto.js';
+import { GetCategoryDto } from './dtos/get-category.dto.js';
+import { DeleteCategoryDto } from './dtos/delete-category.dto.js';
 
 @Injectable()
 export class CategoriesService {
   constructor(
-    @InjectRepository(Category)
-    private readonly categoryRepo: Repository<Category>,
+    private readonly categoriesFindRepository: CategoriesFindRepository,
+    private readonly categoriesCreateRepository: CategoriesCreateRepository,
+    private readonly categoriesUpdateRepository: CategoriesUpdateRepository,
+    private readonly categoriesDeleteRepository: CategoriesDeleteRepository,
   ) {}
 
-  async findTree(): Promise<CategoryTreeDto[]> {
-    const all = await this.categoryRepo.find({
-      where: { isActive: true },
-      order: { sortOrder: 'ASC', name: 'ASC' },
-    });
-
-    const countMap = await this.categoryRepo
-      .createQueryBuilder('c')
-      .select('p.categoryId', 'categoryId')
-      .addSelect('COUNT(*)', 'count')
-      .from('products', 'p')
-      .where('p.isActive = true')
-      .groupBy('p.categoryId')
-      .getRawMany();
-
-    const counts: Record<string, number> = {};
-    for (const row of countMap) {
-      counts[row.categoryId] = parseInt(row.count, 10);
+  findAll(
+    query: GetCategoryDto,
+  ): Promise<CategoryTreeNode[] | PaginatedResult<Category>> {
+    if (query.tree !== false) {
+      return this.categoriesFindRepository.findTree();
     }
-
-    const toDto = (cat: Category): CategoryTreeDto => ({
-      id: cat.id,
-      name: cat.name,
-      slug: cat.slug,
-      imageUrl: cat.imageUrl,
-      sortOrder: cat.sortOrder,
-      productCount: counts[cat.id] ?? 0,
-      children: all
-        .filter((c) => c.parentId === cat.id)
-        .map(toDto),
-    });
-
-    return all.filter((c) => c.parentId === null).map(toDto);
+    return this.categoriesFindRepository.findAllFlat(query);
   }
 
-  async findProductsBySlug(slug: string) {
-    const category = await this.categoryRepo.findOne({ where: { slug } });
-    if (!category) throw new NotFoundException(`Category '${slug}' not found`);
-
-    // Collect this category + all descendant IDs
-    const all = await this.categoryRepo.find();
-    const ids = this.collectDescendants(all, category.id);
-
-    return ids;
+  findOne(categoryId: string): Promise<Category> {
+    return this.categoriesFindRepository.findById(categoryId);
   }
 
-  private collectDescendants(all: Category[], rootId: string): string[] {
-    const ids: string[] = [rootId];
-    const children = all.filter((c) => c.parentId === rootId);
-    for (const child of children) {
-      ids.push(...this.collectDescendants(all, child.id));
+  async findBySlug(categorySlug: string): Promise<Category> {
+    const category =
+      await this.categoriesFindRepository.findBySlug(categorySlug);
+    if (!category) {
+      throw new NotFoundException(
+        `Category with slug '${categorySlug}' not found`,
+      );
     }
-    return ids;
+    return category;
+  }
+
+  create(createCategoryDto: CreateCategoryDto): Promise<Category> {
+    return this.categoriesCreateRepository.create(createCategoryDto);
+  }
+
+  update(
+    categoryId: string,
+    updateCategoryDto: UpdateCategoryDto,
+  ): Promise<Category> {
+    return this.categoriesUpdateRepository.update(
+      categoryId,
+      updateCategoryDto,
+    );
+  }
+
+  remove(categoryId: string): Promise<DeleteCategoryDto> {
+    return this.categoriesDeleteRepository.deactivate(categoryId);
   }
 }

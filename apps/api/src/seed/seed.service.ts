@@ -9,7 +9,11 @@ import { PromoCode } from '../pricing/entities/promo-code.entity.js';
 import { toSlug } from '../common/utils/slug.util.js';
 import { PriceRuleScope, PriceRuleType, PromoApplyScope } from '@myapp/shared';
 
-const UNITS: Array<{ name: string; abbreviation: string; type: UnitOfMeasure['type'] }> = [
+const UNITS: Array<{
+  name: string;
+  abbreviation: string;
+  type: UnitOfMeasure['type'];
+}> = [
   { name: 'LIBRAS', abbreviation: 'lbs', type: 'weight' },
   { name: 'KG', abbreviation: 'kg', type: 'weight' },
   { name: 'ONZAS', abbreviation: 'oz', type: 'weight' },
@@ -100,7 +104,11 @@ export class SeedService {
       let cat = await this.categoryRepo.findOne({ where: { name } });
       if (!cat) {
         cat = await this.categoryRepo.save(
-          this.categoryRepo.create({ name, slug: toSlug(name), parentId: null }),
+          this.categoryRepo.create({
+            name,
+            slug: toSlug(name),
+            parentId: null,
+          }),
         );
       }
       topMap[name] = cat;
@@ -109,7 +117,9 @@ export class SeedService {
     for (const sub of CRM_SUBCATEGORIES) {
       const parent = topMap[sub.parentName];
       if (!parent) continue;
-      const exists = await this.categoryRepo.findOne({ where: { name: sub.name } });
+      const exists = await this.categoryRepo.findOne({
+        where: { name: sub.name },
+      });
       if (!exists) {
         await this.categoryRepo.save(
           this.categoryRepo.create({
@@ -124,7 +134,9 @@ export class SeedService {
   }
 
   private async seedSuppliers(): Promise<void> {
-    const exists = await this.supplierRepo.findOne({ where: { name: 'TECNOPAN' } });
+    const exists = await this.supplierRepo.findOne({
+      where: { name: 'TECNOPAN' },
+    });
     if (!exists) {
       await this.supplierRepo.save(
         this.supplierRepo.create({ name: 'TECNOPAN', slug: 'tecnopan' }),
@@ -140,7 +152,7 @@ export class SeedService {
         ruleType: PriceRuleType.TRADE_TIER,
         scope: PriceRuleScope.ALL_PRODUCTS,
         discountType: 'PERCENTAGE',
-        discountValue: 8,
+        discountValue: '8.00',
         minQuantity: 1,
         priority: 10,
         isStackable: false,
@@ -151,7 +163,7 @@ export class SeedService {
         ruleType: PriceRuleType.VOLUME,
         scope: PriceRuleScope.ALL_PRODUCTS,
         discountType: 'PERCENTAGE',
-        discountValue: 12,
+        discountValue: '12.00',
         minQuantity: 10,
         priority: 20,
         isStackable: false,
@@ -162,7 +174,7 @@ export class SeedService {
         ruleType: PriceRuleType.CLEARANCE,
         scope: PriceRuleScope.ALL_PRODUCTS,
         discountType: 'PERCENTAGE',
-        discountValue: 25,
+        discountValue: '25.00',
         minQuantity: 1,
         priority: 5,
         isStackable: false,
@@ -185,7 +197,7 @@ export class SeedService {
         code: 'SPRING26',
         description: 'Spring fit-out campaign',
         discountType: 'PERCENTAGE',
-        discountValue: 10,
+        discountValue: '10.00',
         applyScope: PromoApplyScope.CART,
         minQuantity: 1,
         maxUsesPerCustomer: 1,
@@ -206,7 +218,7 @@ export class SeedService {
         code: 'WINTER25',
         description: 'Winter clearance (expired)',
         discountType: 'PERCENTAGE',
-        discountValue: 20,
+        discountValue: '20.00',
         applyScope: PromoApplyScope.CART,
         minQuantity: 1,
         maxUsesPerCustomer: 1,
